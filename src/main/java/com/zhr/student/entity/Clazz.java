@@ -1,8 +1,12 @@
 package com.zhr.student.entity;
 
+import com.zhr.student.common.BaseEntity;
+import com.zhr.student.common.SnowflakeIdWorker;
+import org.apache.commons.lang3.StringUtils;
+
 import java.util.List;
 
-public class Clazz {
+public class Clazz extends BaseEntity {
 
     private String clazzId;
 
@@ -32,5 +36,13 @@ public class Clazz {
 
     public void setStudents(List<Student> students) {
         this.students = students;
+    }
+
+
+    @Override
+    public void setEntityId(SnowflakeIdWorker snowflakeIdWorker) {
+        if (StringUtils.isBlank(clazzId)) {
+            clazzId = String.valueOf(snowflakeIdWorker.nextId());
+        }
     }
 }

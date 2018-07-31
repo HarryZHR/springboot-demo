@@ -1,6 +1,10 @@
 package com.zhr.student.entity;
 
-public class School {
+import com.zhr.student.common.BaseEntity;
+import com.zhr.student.common.SnowflakeIdWorker;
+import org.apache.commons.lang3.StringUtils;
+
+public class School extends BaseEntity {
     private String schoolId;
 
     private String schoolName;
@@ -19,5 +23,12 @@ public class School {
 
     public void setSchoolName(String schoolName) {
         this.schoolName = schoolName;
+    }
+
+    @Override
+    public void setEntityId(SnowflakeIdWorker snowflakeIdWorker) {
+        if (StringUtils.isNotBlank(schoolId)) {
+            schoolId =  String.valueOf(snowflakeIdWorker.nextId());
+        }
     }
 }
