@@ -1,25 +1,35 @@
 package com.zhr.student.entity;
 
+import java.util.Date;
+
 public class Student {
-    private Integer id;
-    private String name;
+
+    private String studentId;
+
+    private String studentName;
+
     private String gender;
-    private Integer age;
 
-    public Integer getId() {
-        return id;
+    private Date birthday;
+
+    private Clazz clazz;
+
+    private String password;
+
+    public String getStudentId() {
+        return studentId;
     }
 
-    public void setId(Integer id) {
-        this.id = id;
+    public void setStudentId(String studentId) {
+        this.studentId = studentId;
     }
 
-    public String getName() {
-        return name;
+    public String getStudentName() {
+        return studentName;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setStudentName(String studentName) {
+        this.studentName = studentName;
     }
 
     public String getGender() {
@@ -30,11 +40,27 @@ public class Student {
         this.gender = gender;
     }
 
-    public Integer getAge() {
-        return age;
+    public Date getBirthday() {
+        return birthday;
     }
 
-    public void setAge(Integer age) {
-        this.age = age;
+    public void setBirthday(Date birthday) {
+        this.birthday = birthday;
+    }
+
+    public Clazz getClazz() {
+        return clazz;
+    }
+
+    public void setClazz(Clazz clazz) {
+        this.clazz = clazz;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
     }
 }

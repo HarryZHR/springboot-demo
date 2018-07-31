@@ -7,4 +7,6 @@ import java.util.List;
 public interface StudentService {
 
     List<Student> listStudent();
+
+    Student getStudentByIdAndPassword(String studentId, String password);
 }
