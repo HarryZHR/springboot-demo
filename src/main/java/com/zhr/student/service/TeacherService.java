@@ -6,9 +6,9 @@ public interface TeacherService {
 
     /**
      * 教师登陆
-     * @param teacherId 教师id
+     * @param teacherNum 教师工号
      * @param password 密码
      * @return 教师
      */
-    Teacher getTeacherByIdAndPassword(String teacherId, String password);
+    Teacher getTeacherByNumAndPassword(String teacherNum, String password);
 }

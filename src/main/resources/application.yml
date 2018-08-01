@@ -29,3 +29,14 @@ mybatis:
     map-underscore-to-camel-case: true
     lazy-loading-enabled: true
     auto-mapping-behavior: full
+logging:
+  level:
+    com.zhr.student: debug
+    org.springframework.web: debug
+    org.springframework.transaction: debug
+    org.mybatis: debug
+#pagehelper分页插件配置
+pagehelper:
+  helperDialect: mysql
+  reasonable: true
+  supportMethodsArguments: true

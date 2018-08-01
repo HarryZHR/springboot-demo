@@ -8,6 +8,6 @@ import org.apache.ibatis.annotations.Select;
 @Mapper
 public interface TeacherRepository {
 
-    @Select("SELECT * FROM teacher WHERE teacher_id = #{teacherId} AND password = #{password}")
-    Teacher getTeacherByIdAndPassword(@Param(value = "teacherId") String TeacherId, @Param(value = "password") String password);
+    @Select("SELECT * FROM teacher WHERE teacher_num = #{teacherNum} AND password = #{password}")
+    Teacher getTeacherByNumAndPassword(@Param(value = "teacherNum") String TeacherNum, @Param(value = "password") String password);
 }

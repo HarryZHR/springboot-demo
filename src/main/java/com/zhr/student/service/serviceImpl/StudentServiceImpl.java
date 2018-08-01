@@ -19,8 +19,4 @@ public class StudentServiceImpl implements StudentService {
         return studentRepository.listStudent();
     }
 
-    @Override
-    public Student getStudentByIdAndPassword(String studentId, String password) {
-        return studentRepository.getStudentByIdAndPassword(studentId, password);
-    }
 }

@@ -15,7 +15,7 @@ public class TeacherServiceImpl implements TeacherService {
 
 
     @Override
-    public Teacher getTeacherByIdAndPassword(String teacherId, String password) {
-        return teacherRepository.getTeacherByIdAndPassword(teacherId, password);
+    public Teacher getTeacherByNumAndPassword(String teacherNum, String password) {
+        return teacherRepository.getTeacherByNumAndPassword(teacherNum, password);
     }
 }

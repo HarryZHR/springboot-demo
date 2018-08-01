@@ -8,5 +8,4 @@ public interface StudentService {
 
     List<Student> listStudent();
 
-    Student getStudentByIdAndPassword(String studentId, String password);
 }

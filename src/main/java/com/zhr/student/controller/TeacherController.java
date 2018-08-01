@@ -16,12 +16,12 @@ public class TeacherController {
 
     /**
      * 学生登陆操作
-     * @param teacherId 学生id
+     * @param teacherNum 学生id
      * @param password 密码
      * @return 学生对象
      */
     @GetMapping(params = "action=teacher_login")
-    public Teacher getTeacher(@RequestParam(value = "teacherId") String teacherId, @RequestParam(value = "password") String password) {
-        return teacherService.getTeacherByIdAndPassword(teacherId, password);
+    public Teacher getTeacher(@RequestParam(value = "teacherNum") String teacherNum, @RequestParam(value = "password") String password) {
+        return teacherService.getTeacherByNumAndPassword(teacherNum, password);
     }
 }
