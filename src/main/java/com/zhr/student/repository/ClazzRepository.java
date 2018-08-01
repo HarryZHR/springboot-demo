@@ -17,12 +17,12 @@ public interface ClazzRepository {
      * @param type 文理科
      * @return 分页对象
      */
-    @Select("SELECT * FROM `clazz` " +
+    @Select("<script>SELECT * FROM `clazz` " +
             "WHERE delete_flag = true " +
             "<if test='grade != null'> AND grade = #{grade} </if>" +
             "<if test='clazzNum != null'> AND clazz_num = #{clazzNum} </if>" +
-            "<if test='headTeacher != null'> AND headTeacher_id = #{headTeacherId} </if>" +
-            "<if test='type != null'> AND type = #{type} </if>")
+            "<if test='headTeacherId != null'> AND headTeacher_id = #{headTeacherId} </if>" +
+            "<if test='type != null'> AND type = #{type} </if></script>")
     Page<Clazz> listClazzByPage(@Param(value = "grade") Integer grade,
                                 @Param(value = "clazzNum") Integer clazzNum,
                                 @Param(value = "headTeacherId") String headTeacherId,

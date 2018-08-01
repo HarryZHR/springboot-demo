@@ -44,7 +44,7 @@ public class Clazz extends BaseEntity {
 
     private Teacher headTeacher;
 
-    private String type;
+    private ClazzType type;
 
     private Boolean deleteFlag;
 
@@ -82,11 +82,11 @@ public class Clazz extends BaseEntity {
         this.headTeacher = headTeacher;
     }
 
-    public String getType() {
+    public ClazzType getType() {
         return type;
     }
 
-    public void setType(String type) {
+    public void setType(ClazzType type) {
         this.type = type;
     }
 

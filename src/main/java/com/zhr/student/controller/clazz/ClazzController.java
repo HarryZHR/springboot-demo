@@ -1,4 +1,4 @@
-package com.zhr.student.controller;
+package com.zhr.student.controller.clazz;
 
 import com.github.pagehelper.Page;
 import com.github.pagehelper.PageHelper;
