@@ -36,20 +36,44 @@ public class Clazz extends BaseEntity {
         }
     }
 
+    /**
+     * 班级的id
+     */
     private String clazzId;
 
+    /**
+     * 班级所在年级
+     */
     private Integer grade;
 
+    /**
+     * 班级号
+     */
     private Integer clazzNum;
 
+    /**
+     * 班主任
+     */
     private Teacher headTeacher;
 
+    /**
+     * 文理科类型
+     */
     private ClazzType type;
 
+    /**
+     * 是否删除
+     */
     private Boolean deleteFlag;
 
+    /**
+     * 所属学校
+     */
     private School school;
 
+    /**
+     * 学校里的学生
+     */
     private List<Student> students;
 
     public String getClazzId() {

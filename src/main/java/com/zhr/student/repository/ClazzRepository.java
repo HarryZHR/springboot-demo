@@ -2,9 +2,7 @@ package com.zhr.student.repository;
 
 import com.github.pagehelper.Page;
 import com.zhr.student.entity.Clazz;
-import org.apache.ibatis.annotations.Mapper;
-import org.apache.ibatis.annotations.Param;
-import org.apache.ibatis.annotations.Select;
+import org.apache.ibatis.annotations.*;
 
 import java.util.List;
 
@@ -25,6 +23,9 @@ public interface ClazzRepository {
             "<if test='clazzNum != null'> AND clazz_num = #{clazzNum} </if>" +
             "<if test='headTeacherId != null'> AND headTeacher_id = #{headTeacherId} </if>" +
             "<if test='type != null'> AND type = #{type} </if></script>")
+    /*@Results(
+            @Result(property = "headTeacher", column = "head_teacher_id")
+    )*/
     Page<Clazz> listClazzByPage(@Param(value = "grade") Integer grade,
                                 @Param(value = "clazzNum") Integer clazzNum,
                                 @Param(value = "headTeacherId") String headTeacherId,

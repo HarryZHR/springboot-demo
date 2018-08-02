@@ -36,9 +36,17 @@ public class ClazzController {
         return new MyPage<>(clazzPage, clazzDTO);
     }
 
+    /**
+     * 获取年级号和班级号
+     * @return 年级号和班级号
+     */
+    @GetMapping(params = "action=get_clazz_info")
     public ClazzInfoDTO getClazzInfo() {
-        /*ClazzInfoDTO clazzInfoDTO = new ClazzInfoDTO();
-        clazzService*/
-        return null;
+        List<Integer> grades = clazzService.listGradeAll();
+        List<Integer> clazzNums = clazzService.listClazzNumAll();
+        ClazzInfoDTO clazzInfoDTO = new ClazzInfoDTO();
+        clazzInfoDTO.setClazzNums(clazzNums);
+        clazzInfoDTO.setGrades(grades);
+        return clazzInfoDTO;
     }
 }
