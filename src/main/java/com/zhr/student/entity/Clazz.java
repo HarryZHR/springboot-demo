@@ -48,6 +48,8 @@ public class Clazz extends BaseEntity {
 
     private Boolean deleteFlag;
 
+    private School school;
+
     private List<Student> students;
 
     public String getClazzId() {
@@ -106,6 +108,13 @@ public class Clazz extends BaseEntity {
         this.students = students;
     }
 
+    public School getSchool() {
+        return school;
+    }
+
+    public void setSchool(School school) {
+        this.school = school;
+    }
 
     @Override
     public void setEntityId(SnowflakeIdWorker snowflakeIdWorker) {

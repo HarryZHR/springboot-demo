@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.annotation.Resource;
+import java.util.List;
 
 @Service
 public class ClazzServiceImpl implements ClazzService {
@@ -21,5 +22,10 @@ public class ClazzServiceImpl implements ClazzService {
     public Page<Clazz> listClazzByPage(Integer grade, Integer clazzNum, String headTeacher, String type, Integer pageNo, Integer pageSize) {
         PageHelper.startPage(pageNo, pageSize);
         return clazzRepository.listClazzByPage(grade, clazzNum, headTeacher, type);
+    }
+
+    @Override
+    public List<Integer> listGradeAll() {
+        return null;
     }
 }

@@ -25,6 +25,8 @@ public class Teacher extends BaseEntity {
 
     private String password;
 
+    private School school;
+
     public String getTeacherId() {
         return teacherId;
     }
@@ -87,6 +89,14 @@ public class Teacher extends BaseEntity {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public School getSchool() {
+        return school;
+    }
+
+    public void setSchool(School school) {
+        this.school = school;
     }
 
     @Override

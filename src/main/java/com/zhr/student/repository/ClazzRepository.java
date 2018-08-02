@@ -6,6 +6,8 @@ import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
 
+import java.util.List;
+
 @Mapper
 public interface ClazzRepository {
 
@@ -27,4 +29,10 @@ public interface ClazzRepository {
                                 @Param(value = "clazzNum") Integer clazzNum,
                                 @Param(value = "headTeacherId") String headTeacherId,
                                 @Param(value = "type") String type);
+
+    @Select("SELECT grade FROM `clazz` WHERE school_id = #{schoolId} GROUP BY grade")
+    List<Integer> listGradeAll(@Param(value = "schoolId") String schoolId);
+
+    @Select("SELECT clazz_num FROM `clazz` WHERE school_id = #{schoolId} GROUP BY clazz_num")
+    List<Integer> listClazzNumAll(@Param(value = "schoolId") String schoolId);
 }
