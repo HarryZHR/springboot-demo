@@ -24,4 +24,6 @@ public class TeacherController {
     public Teacher getTeacher(@RequestParam(value = "teacherNum") String teacherNum, @RequestParam(value = "password") String password) {
         return teacherService.getTeacherByNumAndPassword(teacherNum, password);
     }
+
+
 }

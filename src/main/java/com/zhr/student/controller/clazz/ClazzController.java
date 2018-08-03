@@ -26,12 +26,16 @@ public class ClazzController {
     @GetMapping(params = "action=get_all_page")
     public MyPage<ClazzDTO> listStudent(@RequestParam(value = "grade", required = false) Integer grade,
                                         @RequestParam(value = "clazzNum", required = false) Integer clazzNum,
-                                        @RequestParam(value = "headTeacherId", required = false) String headTeacherId,
+                                        @RequestParam(value = "headTeacherName", required = false) String headTeacherName,
                                         @RequestParam(value = "type", required = false) String type,
                                         @RequestParam(value = "pageNo", required = false, defaultValue = "1") Integer pageNo,
                                         @RequestParam(value = "pageSize", required = false, defaultValue = "2") Integer pageSize) {
-
-        Page<Clazz> clazzPage =  clazzService.listClazzByPage(grade, clazzNum, headTeacherId, type, pageNo, pageSize);
+        if ("".equals(headTeacherName)) {
+            headTeacherName = null;
+        } else if (headTeacherName != null){
+            headTeacherName = "%" + headTeacherName + "%";
+        }
+        Page<Clazz> clazzPage =  clazzService.listClazzByPage(grade, clazzNum, headTeacherName, type, pageNo, pageSize);
         List<ClazzDTO> clazzDTO = clazzPage.stream().map(clazz -> new ClazzDTO().convertFrom(clazz)).collect(Collectors.toList());
         return new MyPage<>(clazzPage, clazzDTO);
     }

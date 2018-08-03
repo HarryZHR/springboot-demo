@@ -5,7 +5,7 @@ import com.github.pagehelper.Page;
 import java.util.List;
 
 public class MyPage<T> {
-    private long total;
+    private Integer total;
     private Integer pageNum;
     private Integer pageSize;
     private List<T> pageList;
@@ -14,17 +14,17 @@ public class MyPage<T> {
     }
 
     public MyPage(Page<?> page, List<T> ts) {
-        this.total = page.getTotal();
+        this.total = page.getPages();
         this.pageNum = page.getPageNum();
         this.pageSize = page.getPageSize();
         this.pageList = ts;
     }
 
-    public long getTotal() {
+    public Integer getTotal() {
         return total;
     }
 
-    public void setTotal(long total) {
+    public void setTotal(Integer total) {
         this.total = total;
     }
 
