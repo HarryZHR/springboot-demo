@@ -2,14 +2,24 @@ package com.zhr.student.controller.clazz;
 
 import com.google.common.base.Converter;
 import com.zhr.student.entity.Clazz;
+import com.zhr.student.entity.School;
+import com.zhr.student.entity.Teacher;
 
 public class ClazzDTO {
-
+    private String headTeacherId;
     private Integer grade;
     private Integer clazzNum;
     private String headTeacherName;
     private String type;
     private Integer studentNum;
+
+    public String getHeadTeacherId() {
+        return headTeacherId;
+    }
+
+    public void setHeadTeacherId(String headTeacherId) {
+        this.headTeacherId = headTeacherId;
+    }
 
     public Integer getGrade() {
         return grade;
@@ -65,8 +75,22 @@ public class ClazzDTO {
 
         @Override
         protected Clazz doForward(ClazzDTO clazzDTO) {
-            // dto -> entity
-            return null;
+            Clazz clazz = new Clazz();
+            clazz.setGrade(clazzDTO.getGrade());
+            clazz.setClazzNum(clazzDTO.getClazzNum());
+            if (clazzDTO.getHeadTeacherId() != null) {
+                Teacher teacher = new Teacher();
+                teacher.setTeacherId(clazzDTO.getHeadTeacherId());
+                clazz.setHeadTeacher(teacher);
+            }
+            if (clazzDTO.getType() != null) {
+                if ("science".equals(clazzDTO.getType())){
+                    clazz.setType(Clazz.ClazzType.science);
+                } else {
+                    clazz.setType(Clazz.ClazzType.Liberal_arts);
+                }
+            }
+            return clazz;
         }
 
         @Override

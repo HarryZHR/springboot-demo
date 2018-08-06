@@ -39,4 +39,7 @@ public interface ClazzRepository {
 
     @Select("SELECT clazz_num FROM `clazz` WHERE school_id = #{schoolId} GROUP BY clazz_num")
     List<Integer> listClazzNumAll(@Param(value = "schoolId") String schoolId);
+
+    @Insert("INSERT INTO `clazz` VALUES (#{clazzId}, #{grade}, #{clazzNum}, #{headTeacher.teacherId}, #{type}, #{deleteFlag}, #{school.schoolId})")
+    void saveClazz(Clazz clazz);
 }

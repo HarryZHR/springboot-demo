@@ -1,4 +1,4 @@
-package com.zhr.student.controller;
+package com.zhr.student.controller.student;
 
 import com.zhr.student.entity.Student;
 import com.zhr.student.service.StudentService;

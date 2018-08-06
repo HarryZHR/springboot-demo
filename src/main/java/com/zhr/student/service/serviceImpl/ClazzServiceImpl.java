@@ -40,4 +40,11 @@ public class ClazzServiceImpl implements ClazzService {
         School school = schoolRepository.getSchoolById("324234234");
         return clazzRepository.listClazzNumAll(school.getSchoolId());
     }
+
+    @Override
+    public void saveClazz(Clazz clazz) {
+        clazz.setDeleteFlag(true);
+        clazz.setSchool(schoolRepository.getSchoolById("324234234"));
+        clazzRepository.saveClazz(clazz);
+    }
 }

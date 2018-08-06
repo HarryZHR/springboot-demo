@@ -1,4 +1,4 @@
-package com.zhr.student.common;
+package com.zhr.student.common.util;
 /**
  * Twitter_Snowflake<br>
  * SnowFlake的结构如下(每部分用-分开):<br>

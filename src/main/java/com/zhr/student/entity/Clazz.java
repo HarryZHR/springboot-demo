@@ -1,7 +1,7 @@
 package com.zhr.student.entity;
 
 import com.zhr.student.common.BaseEntity;
-import com.zhr.student.common.SnowflakeIdWorker;
+import com.zhr.student.common.util.SnowflakeIdWorker;
 import org.apache.commons.lang3.StringUtils;
 
 import java.util.List;

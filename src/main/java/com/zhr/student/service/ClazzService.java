@@ -31,4 +31,10 @@ public interface ClazzService {
      * @return 班级集合
      */
     List<Integer> listClazzNumAll();
+
+    /**
+     * 保存一个班级对象
+     * @param clazz 班级的参数
+     */
+    void saveClazz(Clazz clazz);
 }

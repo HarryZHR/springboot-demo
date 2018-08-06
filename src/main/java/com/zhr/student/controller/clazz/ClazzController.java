@@ -7,10 +7,7 @@ import com.zhr.student.common.MyPage;
 import com.zhr.student.entity.Clazz;
 import com.zhr.student.service.ClazzService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.Collections;
 import java.util.List;
@@ -52,5 +49,11 @@ public class ClazzController {
         clazzInfoDTO.setClazzNums(clazzNums);
         clazzInfoDTO.setGrades(grades);
         return clazzInfoDTO;
+    }
+
+    @PostMapping(params = "action=save_one")
+    public void saveOneClazz(@RequestBody ClazzDTO clazzDTO) {
+        Clazz clazz = clazzDTO.convertTo();
+        clazzService.saveClazz(clazz);
     }
 }
