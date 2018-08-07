@@ -24,7 +24,6 @@ public class ClazzController {
     public MyPage<ClazzDTO> listStudent(@RequestParam(value = "grade", required = false) Integer grade,
                                         @RequestParam(value = "clazzNum", required = false) Integer clazzNum,
                                         @RequestParam(value = "headTeacherName", required = false) String headTeacherName,
-                                        @RequestParam(value = "type", required = false) String type,
                                         @RequestParam(value = "pageNo", required = false, defaultValue = "1") Integer pageNo,
                                         @RequestParam(value = "pageSize", required = false, defaultValue = "2") Integer pageSize) {
         if ("".equals(headTeacherName)) {
@@ -32,7 +31,7 @@ public class ClazzController {
         } else if (headTeacherName != null){
             headTeacherName = "%" + headTeacherName + "%";
         }
-        Page<Clazz> clazzPage =  clazzService.listClazzByPage(grade, clazzNum, headTeacherName, type, pageNo, pageSize);
+        Page<Clazz> clazzPage =  clazzService.listClazzByPage(grade, clazzNum, headTeacherName, pageNo, pageSize);
         List<ClazzDTO> clazzDTO = clazzPage.stream().map(clazz -> new ClazzDTO().convertFrom(clazz)).collect(Collectors.toList());
         return new MyPage<>(clazzPage, clazzDTO);
     }
@@ -51,6 +50,10 @@ public class ClazzController {
         return clazzInfoDTO;
     }
 
+    /**
+     * 保存一个班级实体
+     * @param clazzDTO 班级传入的参数
+     */
     @PostMapping(params = "action=save_one")
     public void saveOneClazz(@RequestBody ClazzDTO clazzDTO) {
         Clazz clazz = clazzDTO.convertTo();

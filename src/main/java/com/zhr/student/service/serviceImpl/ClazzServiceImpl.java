@@ -24,27 +24,33 @@ public class ClazzServiceImpl implements ClazzService {
 
     @Transactional(readOnly = true)
     @Override
-    public Page<Clazz> listClazzByPage(Integer grade, Integer clazzNum, String headTeacher, String type, Integer pageNo, Integer pageSize) {
+    public Page<Clazz> listClazzByPage(Integer grade, Integer clazzNum, String headTeacher, Integer pageNo, Integer pageSize) {
         PageHelper.startPage(pageNo, pageSize);
-        return clazzRepository.listClazzByPage(grade, clazzNum, headTeacher, type);
+        return clazzRepository.listClazzByPage(grade, clazzNum, headTeacher);
     }
 
     @Override
     public List<Integer> listGradeAll() {
-        School school = schoolRepository.getSchoolById("324234234");
+        School school = schoolRepository.getSchoolById(324234234L);
         return clazzRepository.listGradeAll(school.getSchoolId());
     }
 
     @Override
     public List<Integer> listClazzNumAll() {
-        School school = schoolRepository.getSchoolById("324234234");
+        School school = schoolRepository.getSchoolById(324234234L);
         return clazzRepository.listClazzNumAll(school.getSchoolId());
     }
 
     @Override
     public void saveClazz(Clazz clazz) {
         clazz.setDeleteFlag(true);
-        clazz.setSchool(schoolRepository.getSchoolById("324234234"));
+        clazz.setSchool(schoolRepository.getSchoolById(324234234L));
         clazzRepository.saveClazz(clazz);
+    }
+
+    @Override
+    public Clazz getClazzByGradeAndClazzNum(Integer grade, Integer clazzNum) {
+
+        return clazzRepository.getClazzByGradeAndClazzNum(grade, clazzNum, 324234234L);
     }
 }

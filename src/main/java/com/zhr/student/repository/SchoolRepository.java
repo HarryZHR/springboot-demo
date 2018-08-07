@@ -13,5 +13,5 @@ public interface SchoolRepository {
      * @return 学校对象
      */
     @Select("SELECT * FROM `school` WHERE school_id = #{schoolId}")
-    School getSchoolById(@Param(value = "schoolId") String schoolId);
+    School getSchoolById(@Param(value = "schoolId") Long schoolId);
 }

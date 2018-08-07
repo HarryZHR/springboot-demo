@@ -42,7 +42,7 @@ public class TeacherSelectDTO {
         @Override
         protected TeacherSelectDTO doBackward(Teacher teacher) {
             TeacherSelectDTO dto = new TeacherSelectDTO();
-            dto.setId(teacher.getTeacherId());
+            dto.setId(String.valueOf(teacher.getTeacherId()));
             dto.setName(teacher.getTeacherName());
             return dto;
         }

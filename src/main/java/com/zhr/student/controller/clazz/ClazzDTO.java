@@ -80,15 +80,8 @@ public class ClazzDTO {
             clazz.setClazzNum(clazzDTO.getClazzNum());
             if (clazzDTO.getHeadTeacherId() != null) {
                 Teacher teacher = new Teacher();
-                teacher.setTeacherId(clazzDTO.getHeadTeacherId());
+                teacher.setTeacherId(Long.valueOf(clazzDTO.getHeadTeacherId()));
                 clazz.setHeadTeacher(teacher);
-            }
-            if (clazzDTO.getType() != null) {
-                if ("science".equals(clazzDTO.getType())){
-                    clazz.setType(Clazz.ClazzType.science);
-                } else {
-                    clazz.setType(Clazz.ClazzType.Liberal_arts);
-                }
             }
             return clazz;
         }
@@ -98,9 +91,6 @@ public class ClazzDTO {
             ClazzDTO clazzDTO = new ClazzDTO();
             clazzDTO.setClazzNum(clazz.getClazzNum());
             clazzDTO.setGrade(clazz.getGrade());
-            if (clazz.getType() != null) {
-                clazzDTO.setType(clazz.getType().getValue());
-            }
             if (clazz.getStudents() != null) {
                 clazzDTO.setStudentNum(clazz.getStudents().size());
             }

@@ -26,7 +26,7 @@ public class TeacherServiceImpl implements TeacherService {
 
     @Override
     public List<Teacher> listTeacher() {
-        School school = schoolRepository.getSchoolById("324234234");
+        School school = schoolRepository.getSchoolById(324234234L);
         return teacherRepository.listTeacher(school.getSchoolId());
     }
 }

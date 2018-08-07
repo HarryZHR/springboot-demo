@@ -1,45 +1,13 @@
 package com.zhr.student.entity;
 
-import com.zhr.student.common.BaseEntity;
-import com.zhr.student.common.util.SnowflakeIdWorker;
-import org.apache.commons.lang3.StringUtils;
-
 import java.util.List;
 
-public class Clazz extends BaseEntity {
-
-    /**
-     * 文理科枚举类
-     */
-    public enum ClazzType {
-        /**
-         * 文科
-         */
-        Liberal_arts("文科"),
-        /**
-         * 理科
-         */
-        science("理科");
-
-        private String value;
-
-        ClazzType(String value) {
-            this.value = value;
-        }
-
-        public String getValue() {
-            return value;
-        }
-
-        public void setValue(String value) {
-            this.value = value;
-        }
-    }
+public class Clazz {
 
     /**
      * 班级的id
      */
-    private String clazzId;
+    private Long clazzId;
 
     /**
      * 班级所在年级
@@ -57,11 +25,6 @@ public class Clazz extends BaseEntity {
     private Teacher headTeacher;
 
     /**
-     * 文理科类型
-     */
-    private ClazzType type;
-
-    /**
      * 是否删除
      */
     private Boolean deleteFlag;
@@ -76,11 +39,11 @@ public class Clazz extends BaseEntity {
      */
     private List<Student> students;
 
-    public String getClazzId() {
+    public Long getClazzId() {
         return clazzId;
     }
 
-    public void setClazzId(String clazzId) {
+    public void setClazzId(Long clazzId) {
         this.clazzId = clazzId;
     }
 
@@ -108,14 +71,6 @@ public class Clazz extends BaseEntity {
         this.headTeacher = headTeacher;
     }
 
-    public ClazzType getType() {
-        return type;
-    }
-
-    public void setType(ClazzType type) {
-        this.type = type;
-    }
-
     public Boolean getDeleteFlag() {
         return deleteFlag;
     }
@@ -140,10 +95,4 @@ public class Clazz extends BaseEntity {
         this.school = school;
     }
 
-    @Override
-    public void setEntityId(SnowflakeIdWorker snowflakeIdWorker) {
-        if (StringUtils.isBlank(clazzId)) {
-            clazzId = String.valueOf(snowflakeIdWorker.nextId());
-        }
-    }
 }

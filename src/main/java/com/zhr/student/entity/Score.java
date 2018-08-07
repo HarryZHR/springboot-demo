@@ -1,12 +1,8 @@
 package com.zhr.student.entity;
 
-import com.zhr.student.common.BaseEntity;
-import com.zhr.student.common.util.SnowflakeIdWorker;
-import org.apache.commons.lang3.StringUtils;
+public class Score {
 
-public class Score extends BaseEntity {
-
-    private String scoreId;
+    private Long scoreId;
 
     private Student student;
 
@@ -14,11 +10,11 @@ public class Score extends BaseEntity {
 
     private Float scoreNum;
 
-    public String getScoreId() {
+    public Long getScoreId() {
         return scoreId;
     }
 
-    public void setScoreId(String scoreId) {
+    public void setScoreId(Long scoreId) {
         this.scoreId = scoreId;
     }
 
@@ -46,10 +42,4 @@ public class Score extends BaseEntity {
         this.scoreNum = scoreNum;
     }
 
-    @Override
-    public void setEntityId(SnowflakeIdWorker snowflakeIdWorker) {
-        if (StringUtils.isNotBlank(scoreId)) {
-            scoreId =  String.valueOf(snowflakeIdWorker.nextId());
-        }
-    }
 }

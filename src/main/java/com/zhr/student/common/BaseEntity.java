@@ -7,10 +7,6 @@ import java.beans.Transient;
 
 public abstract class BaseEntity{
 
-    public BaseEntity(){
-        SnowflakeIdWorker snowflakeIdWorker = SpringContextUtils.getBean("snowflakeIdWorker");
-        setEntityId(snowflakeIdWorker);
-    }
 
     @Transient
     public abstract void setEntityId(SnowflakeIdWorker snowflakeIdWorker);

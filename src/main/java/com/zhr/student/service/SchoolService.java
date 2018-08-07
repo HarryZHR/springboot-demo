@@ -4,5 +4,5 @@ import com.zhr.student.entity.School;
 
 public interface SchoolService {
 
-    School getSchoolById(String schoolId);
+    School getSchoolById(Long schoolId);
 }

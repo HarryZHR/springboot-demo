@@ -1,14 +1,10 @@
 package com.zhr.student.entity;
 
-import com.zhr.student.common.BaseEntity;
-import com.zhr.student.common.util.SnowflakeIdWorker;
-import org.apache.commons.lang3.StringUtils;
-
 import java.util.Date;
 
-public class Student extends BaseEntity {
+public class Student {
 
-    private String studentId;
+    private Long studentId;
 
     private String studentNum;
 
@@ -22,11 +18,11 @@ public class Student extends BaseEntity {
 
     private String password;
 
-    public String getStudentId() {
+    public Long getStudentId() {
         return studentId;
     }
 
-    public void setStudentId(String studentId) {
+    public void setStudentId(Long studentId) {
         this.studentId = studentId;
     }
 
@@ -78,10 +74,4 @@ public class Student extends BaseEntity {
         this.password = password;
     }
 
-    @Override
-    public void setEntityId(SnowflakeIdWorker snowflakeIdWorker) {
-        if (StringUtils.isNotBlank(studentId)) {
-            studentId =  String.valueOf(snowflakeIdWorker.nextId());
-        }
-    }
 }

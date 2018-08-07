@@ -14,8 +14,8 @@ public interface TeacherRepository {
     Teacher getTeacherByNumAndPassword(@Param(value = "teacherNum") String TeacherNum, @Param(value = "password") String password);
 
     @Select("SELECT * FROM `teacher` WHERE teacher_id = #{teacherId}")
-    Teacher getTeacherById(@Param(value = "teacherId") String teacherId);
+    Teacher getTeacherById(@Param(value = "teacherId") Long teacherId);
 
     @Select("SELECT * FROM `teacher` WHERE school_id= #{schoolId} AND identity = 'teacher'")
-    List<Teacher> listTeacher(@Param(value = "schoolId") String schoolId);
+    List<Teacher> listTeacher(@Param(value = "schoolId") Long schoolId);
 }

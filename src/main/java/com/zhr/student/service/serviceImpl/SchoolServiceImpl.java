@@ -14,7 +14,7 @@ public class SchoolServiceImpl implements SchoolService {
     private SchoolRepository schoolRepository;
 
     @Override
-    public School getSchoolById(String schoolId) {
+    public School getSchoolById(Long schoolId) {
         return schoolRepository.getSchoolById(schoolId);
     }
 }
