@@ -42,15 +42,18 @@ public class ClazzServiceImpl implements ClazzService {
     }
 
     @Override
-    public void saveClazz(Clazz clazz) {
-        clazz.setDeleteFlag(true);
-        clazz.setSchool(schoolRepository.getSchoolById(324234234L));
-        clazzRepository.saveClazz(clazz);
+    public Integer saveClazz(Clazz clazz) {
+        if (clazzRepository.getClazzByGradeAndClazzNum(clazz.getGrade(), clazz.getClazzNum(),324234234L) != null){
+            return 0;
+        } else {
+            clazz.setDeleteFlag(true);
+            clazz.setSchool(schoolRepository.getSchoolById(324234234L));
+            return clazzRepository.saveClazz(clazz);
+        }
     }
 
     @Override
     public Clazz getClazzByGradeAndClazzNum(Integer grade, Integer clazzNum) {
-
         return clazzRepository.getClazzByGradeAndClazzNum(grade, clazzNum, 324234234L);
     }
 }

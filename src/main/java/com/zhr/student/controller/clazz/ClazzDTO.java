@@ -78,10 +78,12 @@ public class ClazzDTO {
             Clazz clazz = new Clazz();
             clazz.setGrade(clazzDTO.getGrade());
             clazz.setClazzNum(clazzDTO.getClazzNum());
-            if (clazzDTO.getHeadTeacherId() != null) {
+            if (!"".equals(clazzDTO.getHeadTeacherId()) && clazzDTO.getHeadTeacherId() != null) {
                 Teacher teacher = new Teacher();
                 teacher.setTeacherId(Long.valueOf(clazzDTO.getHeadTeacherId()));
                 clazz.setHeadTeacher(teacher);
+            }else {
+                clazz.setHeadTeacher(null);
             }
             return clazz;
         }

@@ -23,8 +23,7 @@ public interface ClazzRepository {
             "WHERE t1.delete_flag = true " +
             "<if test='grade != null'> AND t1.grade = #{grade} </if>" +
             "<if test='clazzNum != null'> AND t1.clazz_num = #{clazzNum} </if>" +
-            "<if test='headTeacherName != null'> AND t2.teacher_name like #{headTeacherName} </if>" +
-            "<if test='type != null'> AND t1.type = #{type} </if></script>")
+            "<if test='headTeacherName != null'> AND t2.teacher_name like #{headTeacherName} </if></script>")
     @Results({
             @Result(property = "headTeacher", column = "head_teacher_id", javaType = Teacher.class,
                     one = @One(select = "com.zhr.student.repository.TeacherRepository.getTeacherById"))
@@ -46,5 +45,5 @@ public interface ClazzRepository {
 
     @Insert("INSERT INTO `clazz` VALUES (#{clazzId}, #{grade}, #{clazzNum}, #{headTeacher.teacherId}, #{deleteFlag}, #{school.schoolId})")
     @SelectKey(statement = "select LAST_INSERT_ID()", keyProperty = "clazzId", before = false, resultType = java.lang.Long.class)
-    void saveClazz(Clazz clazz);
+    Integer saveClazz(Clazz clazz);
 }

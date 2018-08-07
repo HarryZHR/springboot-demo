@@ -35,7 +35,7 @@ public interface ClazzService {
      * 保存一个班级对象
      * @param clazz 班级的参数
      */
-    void saveClazz(Clazz clazz);
+Integer saveClazz(Clazz clazz);
 
     /**
      * 通过年级和班级号确定一个班级

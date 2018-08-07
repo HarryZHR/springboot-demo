@@ -10,7 +10,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Collections;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.stream.Collectors;
 
 @RestController
@@ -55,8 +57,10 @@ public class ClazzController {
      * @param clazzDTO 班级传入的参数
      */
     @PostMapping(params = "action=save_one")
-    public void saveOneClazz(@RequestBody ClazzDTO clazzDTO) {
+    public Map<String, Integer> saveOneClazz(@RequestBody ClazzDTO clazzDTO) {
         Clazz clazz = clazzDTO.convertTo();
-        clazzService.saveClazz(clazz);
+        Map<String, Integer> resultMap = new HashMap<>();
+        resultMap.put("colNum",clazzService.saveClazz(clazz));
+        return resultMap;
     }
 }
