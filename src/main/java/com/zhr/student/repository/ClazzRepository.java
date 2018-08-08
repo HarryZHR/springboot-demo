@@ -4,7 +4,9 @@ import com.github.pagehelper.Page;
 import com.zhr.student.entity.Clazz;
 import com.zhr.student.entity.Teacher;
 import org.apache.ibatis.annotations.*;
+import org.springframework.web.bind.annotation.RequestParam;
 
+import java.util.Collection;
 import java.util.List;
 
 @Mapper
@@ -32,18 +34,30 @@ public interface ClazzRepository {
                                 @Param(value = "clazzNum") Integer clazzNum,
                                 @Param(value = "headTeacherName") String headTeacherName);
 
-    @Select("SELECT grade FROM `clazz` WHERE school_id = #{schoolId} GROUP BY grade")
+    @Select("SELECT grade FROM `clazz` WHERE school_id = #{schoolId} AND delete_flag = TRUE GROUP BY grade")
     List<Integer> listGradeAll(@Param(value = "schoolId") Long schoolId);
 
-    @Select("SELECT clazz_num FROM `clazz` WHERE school_id = #{schoolId} GROUP BY clazz_num")
+    @Select("SELECT clazz_num FROM `clazz` WHERE school_id = #{schoolId} AND delete_flag = TRUE GROUP BY clazz_num")
     List<Integer> listClazzNumAll(@Param(value = "schoolId") Long schoolId);
 
-    @Select("SELECT * FROM `clazz` WHERE grade = #{grade} AND clazz_num = #{clazzNum} AND school_id = #{schoolId}")
-    Clazz getClazzByGradeAndClazzNum(@Param(value = "grade") Integer grade,
+    @Select("SELECT * FROM `clazz` WHERE grade = #{grade} AND clazz_num = #{clazzNum} AND school_id = #{schoolId} AND delete_flag = TRUE")
+    Clazz findClazzByGradeAndClazzNum(@Param(value = "grade") Integer grade,
                                      @Param(value = "clazzNum") Integer clazzNum,
                                      @Param(value = "schoolId") Long schoolId);
 
     @Insert("INSERT INTO `clazz` VALUES (#{clazzId}, #{grade}, #{clazzNum}, #{headTeacher.teacherId}, #{deleteFlag}, #{school.schoolId})")
     @SelectKey(statement = "select LAST_INSERT_ID()", keyProperty = "clazzId", before = false, resultType = java.lang.Long.class)
     Integer saveClazz(Clazz clazz);
+
+    @Insert({"<script>" +
+            " INSERT INTO `clazz` ( grade, clazz_num, head_teacher_id, delete_flag, school_id ) VALUES " +
+            "<foreach item='clazz' collection='clazzList' index='index' separator =','>" +
+            "(#{clazz.grade}, #{clazz.clazzNum}, #{clazz.headTeacher.teacherId}, #{clazz.deleteFlag}, #{clazz.school.schoolId}) " +
+            "</foreach>" +
+            "</script>"})
+    @SelectKey(statement = "select LAST_INSERT_ID()", keyProperty = "clazzId", before = false, resultType = java.lang.Long.class)
+    Integer saveClazzList(@Param("clazzList") Collection<Clazz> clazzList);
+
+    @Select("SELECT * FROM `clazz` WHERE clazz_id = #{id}")
+    Clazz findClazzById(@RequestParam(value = "id") Long id);
 }

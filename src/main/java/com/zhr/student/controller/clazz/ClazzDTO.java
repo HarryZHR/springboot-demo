@@ -2,16 +2,25 @@ package com.zhr.student.controller.clazz;
 
 import com.google.common.base.Converter;
 import com.zhr.student.entity.Clazz;
-import com.zhr.student.entity.School;
 import com.zhr.student.entity.Teacher;
+import org.apache.commons.lang3.StringUtils;
 
 public class ClazzDTO {
+    private Long clazzId;
     private String headTeacherId;
     private Integer grade;
-    private Integer clazzNum;
+    private Integer startClazzNum;
+    private Integer endClazzNum;
     private String headTeacherName;
-    private String type;
     private Integer studentNum;
+
+    public Long getClazzId() {
+        return clazzId;
+    }
+
+    public void setClazzId(Long clazzId) {
+        this.clazzId = clazzId;
+    }
 
     public String getHeadTeacherId() {
         return headTeacherId;
@@ -29,12 +38,20 @@ public class ClazzDTO {
         this.grade = grade;
     }
 
-    public Integer getClazzNum() {
-        return clazzNum;
+    public Integer getStartClazzNum() {
+        return startClazzNum;
     }
 
-    public void setClazzNum(Integer clazzNum) {
-        this.clazzNum = clazzNum;
+    public void setStartClazzNum(Integer startClazzNum) {
+        this.startClazzNum = startClazzNum;
+    }
+
+    public Integer getEndClazzNum() {
+        return endClazzNum;
+    }
+
+    public void setEndClazzNum(Integer endClazzNum) {
+        this.endClazzNum = endClazzNum;
     }
 
     public String getHeadTeacherName() {
@@ -43,14 +60,6 @@ public class ClazzDTO {
 
     public void setHeadTeacherName(String headTeacherName) {
         this.headTeacherName = headTeacherName;
-    }
-
-    public String getType() {
-        return type;
-    }
-
-    public void setType(String type) {
-        this.type = type;
     }
 
     public Integer getStudentNum() {
@@ -76,9 +85,9 @@ public class ClazzDTO {
         @Override
         protected Clazz doForward(ClazzDTO clazzDTO) {
             Clazz clazz = new Clazz();
+            clazz.setClazzNum(clazzDTO.getStartClazzNum());
             clazz.setGrade(clazzDTO.getGrade());
-            clazz.setClazzNum(clazzDTO.getClazzNum());
-            if (!"".equals(clazzDTO.getHeadTeacherId()) && clazzDTO.getHeadTeacherId() != null) {
+            if (StringUtils.isNotBlank(clazzDTO.getHeadTeacherId())) {
                 Teacher teacher = new Teacher();
                 teacher.setTeacherId(Long.valueOf(clazzDTO.getHeadTeacherId()));
                 clazz.setHeadTeacher(teacher);
@@ -91,13 +100,18 @@ public class ClazzDTO {
         @Override
         protected ClazzDTO doBackward(Clazz clazz) {
             ClazzDTO clazzDTO = new ClazzDTO();
-            clazzDTO.setClazzNum(clazz.getClazzNum());
+            clazzDTO.setClazzId(clazz.getClazzId());
+            clazzDTO.setStartClazzNum(clazz.getClazzNum());
             clazzDTO.setGrade(clazz.getGrade());
             if (clazz.getStudents() != null) {
                 clazzDTO.setStudentNum(clazz.getStudents().size());
+            } else {
+                clazzDTO.setStudentNum(0);
             }
             if (clazz.getHeadTeacher() != null) {
                 clazzDTO.setHeadTeacherName(clazz.getHeadTeacher().getTeacherName());
+            } else {
+                clazzDTO.setHeadTeacherName("暂未设置");
             }
             return clazzDTO;
         }

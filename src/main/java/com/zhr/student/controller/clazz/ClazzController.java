@@ -27,7 +27,7 @@ public class ClazzController {
                                         @RequestParam(value = "clazzNum", required = false) Integer clazzNum,
                                         @RequestParam(value = "headTeacherName", required = false) String headTeacherName,
                                         @RequestParam(value = "pageNo", required = false, defaultValue = "1") Integer pageNo,
-                                        @RequestParam(value = "pageSize", required = false, defaultValue = "2") Integer pageSize) {
+                                        @RequestParam(value = "pageSize", required = false, defaultValue = "5") Integer pageSize) {
         if ("".equals(headTeacherName)) {
             headTeacherName = null;
         } else if (headTeacherName != null){
@@ -52,15 +52,31 @@ public class ClazzController {
         return clazzInfoDTO;
     }
 
-    /**
+    /*
      * 保存一个班级实体
      * @param clazzDTO 班级传入的参数
      */
-    @PostMapping(params = "action=save_one")
+    /*@PostMapping(params = "action=save_one")
     public Map<String, Integer> saveOneClazz(@RequestBody ClazzDTO clazzDTO) {
         Clazz clazz = clazzDTO.convertTo();
         Map<String, Integer> resultMap = new HashMap<>();
         resultMap.put("colNum",clazzService.saveClazz(clazz));
         return resultMap;
+    }*/
+
+    /**
+     * 批量保存班级实体
+     */
+    @PostMapping(params = "action=save_list")
+    public Map<String, Integer> saveClazzList(@RequestBody ClazzDTO clazzDTO) {
+        Map<String, Integer> resultMap = new HashMap<>();
+        resultMap.put("colNum",clazzService.saveClazzList(clazzDTO.convertTo(), clazzDTO.getEndClazzNum()));
+        return resultMap;
     }
+
+    @GetMapping(value="/{clazzId}")
+    public ClazzDTO getClazz(@PathVariable Long clazzId){
+        return new ClazzDTO().convertFrom(clazzService.getClazzById(clazzId));
+    }
+
 }

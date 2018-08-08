@@ -35,7 +35,7 @@ public interface ClazzService {
      * 保存一个班级对象
      * @param clazz 班级的参数
      */
-Integer saveClazz(Clazz clazz);
+    Integer saveClazz(Clazz clazz);
 
     /**
      * 通过年级和班级号确定一个班级
@@ -44,4 +44,17 @@ Integer saveClazz(Clazz clazz);
      * @return 班级
      */
     Clazz getClazzByGradeAndClazzNum(Integer grade, Integer clazzNum);
+
+    /**
+     * 批量插入班级
+     * @return 返回插入记录数
+     */
+    Integer saveClazzList(Clazz clazz, Integer endClazzNum);
+
+    /**
+     * 通过id获取班级对象
+     * @param id 班级id
+     * @return 班级对象
+     */
+    Clazz getClazzById(Long id);
 }
