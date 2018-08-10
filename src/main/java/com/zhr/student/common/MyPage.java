@@ -4,16 +4,16 @@ import com.github.pagehelper.Page;
 
 import java.util.List;
 
-public class MyPage<T> {
+public class MyPage {
     private Integer total;
     private Integer pageNum;
     private Integer pageSize;
-    private List<T> pageList;
+    private List<?> pageList;
 
     public MyPage() {
     }
 
-    public MyPage(Page<?> page, List<T> ts) {
+    public MyPage(Page<?> page, List<?> ts) {
         this.total = page.getPages();
         this.pageNum = page.getPageNum();
         this.pageSize = page.getPageSize();
@@ -44,11 +44,11 @@ public class MyPage<T> {
         this.pageSize = pageSize;
     }
 
-    public List<T> getPageList() {
+    public List<?> getPageList() {
         return pageList;
     }
 
-    public void setPageList(List<T> pageList) {
+    public void setPageList(List<?> pageList) {
         this.pageList = pageList;
     }
 }

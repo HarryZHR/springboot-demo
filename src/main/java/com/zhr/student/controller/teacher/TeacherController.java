@@ -1,7 +1,10 @@
 package com.zhr.student.controller.teacher;
 
+import com.github.pagehelper.Page;
+import com.zhr.student.common.MyPage;
 import com.zhr.student.entity.Teacher;
 import com.zhr.student.service.TeacherService;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -36,5 +39,20 @@ public class TeacherController {
     public List<TeacherSelectDTO> getTeacherAll() {
         List<Teacher> teachers = teacherService.listTeacher();
         return teachers.stream().map(teacher -> new TeacherSelectDTO().convertFrom(teacher)).collect(Collectors.toList());
+    }
+
+    @GetMapping(params = "action=get_page")
+    public MyPage getTeacherPage(@RequestParam(value = "teacherNum",required = false) String teacherNum,
+                                                   @RequestParam(value = "teacherName",required = false) String teacherName,
+                                                   @RequestParam(value = "pageNo", required = false, defaultValue = "1") Integer pageNo,
+                                                   @RequestParam(value = "pageSize", required = false, defaultValue = "10") Integer pageSize) {
+        if (StringUtils.isBlank(teacherName)) {
+            teacherName = null;
+        } else {
+            teacherName = "%" + teacherName + "%";
+        }
+        Page<Teacher> teacherPage = teacherService.listTeacherByPage(teacherNum, teacherName, pageNo, pageSize);
+        List<TeacherSelectDTO> teacherDTOS = teacherPage.stream().map(teacher -> new TeacherSelectDTO().convertFrom(teacher)).collect(Collectors.toList());
+        return new MyPage(teacherPage, teacherDTOS);
     }
 }

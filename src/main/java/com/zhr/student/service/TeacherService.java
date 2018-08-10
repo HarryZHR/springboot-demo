@@ -1,5 +1,6 @@
 package com.zhr.student.service;
 
+import com.github.pagehelper.Page;
 import com.zhr.student.entity.Teacher;
 
 import java.util.List;
@@ -19,4 +20,14 @@ public interface TeacherService {
      * @return 教师集合
      */
     List<Teacher> listTeacher();
+
+    /**
+     * get all teachers in this school by page
+     * @param teacherNum teacher's work id
+     * @param teacherName teacher's name key
+     * @param pageNo current page number
+     * @param pageSize every page teacher's number
+     * @return teacher collection
+     */
+    Page<Teacher> listTeacherByPage(String teacherNum, String teacherName, Integer pageNo, Integer pageSize);
 }

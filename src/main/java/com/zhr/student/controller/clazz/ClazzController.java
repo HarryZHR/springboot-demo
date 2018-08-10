@@ -23,7 +23,7 @@ public class ClazzController {
     private ClazzService clazzService;
 
     @GetMapping(params = "action=get_all_page")
-    public MyPage<ClazzDTO> listStudent(@RequestParam(value = "grade", required = false) Integer grade,
+    public MyPage listStudent(@RequestParam(value = "grade", required = false) Integer grade,
                                         @RequestParam(value = "clazzNum", required = false) Integer clazzNum,
                                         @RequestParam(value = "headTeacherName", required = false) String headTeacherName,
                                         @RequestParam(value = "pageNo", required = false, defaultValue = "1") Integer pageNo,
@@ -34,8 +34,8 @@ public class ClazzController {
             headTeacherName = "%" + headTeacherName + "%";
         }
         Page<Clazz> clazzPage =  clazzService.listClazzByPage(grade, clazzNum, headTeacherName, pageNo, pageSize);
-        List<ClazzDTO> clazzDTO = clazzPage.stream().map(clazz -> new ClazzDTO().convertFrom(clazz)).collect(Collectors.toList());
-        return new MyPage<>(clazzPage, clazzDTO);
+        List<ClazzDTO> clazzDTOS = clazzPage.stream().map(clazz -> new ClazzDTO().convertFrom(clazz)).collect(Collectors.toList());
+        return new MyPage(clazzPage, clazzDTOS);
     }
 
     /**
@@ -52,18 +52,6 @@ public class ClazzController {
         return clazzInfoDTO;
     }
 
-    /*
-     * 保存一个班级实体
-     * @param clazzDTO 班级传入的参数
-     */
-    /*@PostMapping(params = "action=save_one")
-    public Map<String, Integer> saveOneClazz(@RequestBody ClazzDTO clazzDTO) {
-        Clazz clazz = clazzDTO.convertTo();
-        Map<String, Integer> resultMap = new HashMap<>();
-        resultMap.put("colNum",clazzService.saveClazz(clazz));
-        return resultMap;
-    }*/
-
     /**
      * 批量保存班级实体
      */
@@ -74,6 +62,11 @@ public class ClazzController {
         return resultMap;
     }
 
+    /**
+     * 获取一个班级的详情
+     * @param clazzId 班级id
+     * @return 班级实体
+     */
     @GetMapping(value="/{clazzId}")
     public ClazzDTO getClazz(@PathVariable Long clazzId){
         return new ClazzDTO().convertFrom(clazzService.getClazzById(clazzId));
