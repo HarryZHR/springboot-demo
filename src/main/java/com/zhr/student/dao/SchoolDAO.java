@@ -1,4 +1,4 @@
-package com.zhr.student.repository;
+package com.zhr.student.dao;
 
 import com.zhr.student.entity.School;
 import org.apache.ibatis.annotations.Mapper;
@@ -6,7 +6,7 @@ import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
 
 @Mapper
-public interface SchoolRepository {
+public interface SchoolDAO {
     /**
      * 根据id查询学校
      * @param schoolId 学校id

@@ -1,4 +1,4 @@
-package com.zhr.student.repository;
+package com.zhr.student.dao;
 
 import com.github.pagehelper.Page;
 import com.zhr.student.entity.Clazz;
@@ -10,7 +10,7 @@ import java.util.Collection;
 import java.util.List;
 
 @Mapper
-public interface ClazzRepository {
+public interface ClazzDAO {
 
     /**
      * 搜索班级，并分页
@@ -28,7 +28,7 @@ public interface ClazzRepository {
             "<if test='headTeacherName != null'> AND t2.teacher_name like #{headTeacherName} </if></script>")
     @Results({
             @Result(property = "headTeacher", column = "head_teacher_id", javaType = Teacher.class,
-                    one = @One(select = "com.zhr.student.repository.TeacherRepository.getTeacherById"))
+                    one = @One(select = "com.zhr.student.dao.TeacherDAO.getTeacherById"))
     })
     Page<Clazz> listClazzByPage(@Param(value = "grade") Integer grade,
                                 @Param(value = "clazzNum") Integer clazzNum,

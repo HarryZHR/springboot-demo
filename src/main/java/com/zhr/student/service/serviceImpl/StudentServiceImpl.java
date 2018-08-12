@@ -1,7 +1,7 @@
 package com.zhr.student.service.serviceImpl;
 
 import com.zhr.student.entity.Student;
-import com.zhr.student.repository.StudentRepository;
+import com.zhr.student.dao.StudentDAO;
 import com.zhr.student.service.StudentService;
 import org.springframework.stereotype.Service;
 
@@ -12,11 +12,11 @@ import java.util.List;
 public class StudentServiceImpl implements StudentService {
 
     @Resource
-    private StudentRepository studentRepository;
+    private StudentDAO studentDAO;
 
     @Override
     public List<Student> listStudent() {
-        return studentRepository.listStudent();
+        return studentDAO.listStudent();
     }
 
 }

@@ -1,7 +1,7 @@
 package com.zhr.student.service.serviceImpl;
 
 import com.zhr.student.entity.School;
-import com.zhr.student.repository.SchoolRepository;
+import com.zhr.student.dao.SchoolDAO;
 import com.zhr.student.service.SchoolService;
 import org.springframework.stereotype.Service;
 
@@ -11,10 +11,10 @@ import javax.annotation.Resource;
 public class SchoolServiceImpl implements SchoolService {
 
     @Resource
-    private SchoolRepository schoolRepository;
+    private SchoolDAO schoolDAO;
 
     @Override
     public School getSchoolById(Long schoolId) {
-        return schoolRepository.getSchoolById(schoolId);
+        return schoolDAO.getSchoolById(schoolId);
     }
 }

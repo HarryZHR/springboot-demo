@@ -1,14 +1,17 @@
 package com.zhr.student.controller.clazz;
 
 import com.google.common.base.Converter;
+import com.zhr.student.common.util.DateUtils;
 import com.zhr.student.entity.Clazz;
 import com.zhr.student.entity.Teacher;
 import org.apache.commons.lang3.StringUtils;
 
+import java.util.Date;
+
 public class ClazzDTO {
     private Long clazzId;
     private String headTeacherId;
-    private Integer grade;
+    private String grade;
     private Integer startClazzNum;
     private Integer endClazzNum;
     private String headTeacherName;
@@ -30,11 +33,11 @@ public class ClazzDTO {
         this.headTeacherId = headTeacherId;
     }
 
-    public Integer getGrade() {
+    public String getGrade() {
         return grade;
     }
 
-    public void setGrade(Integer grade) {
+    public void setGrade(String grade) {
         this.grade = grade;
     }
 
@@ -86,7 +89,7 @@ public class ClazzDTO {
         protected Clazz doForward(ClazzDTO clazzDTO) {
             Clazz clazz = new Clazz();
             clazz.setClazzNum(clazzDTO.getStartClazzNum());
-            clazz.setGrade(clazzDTO.getGrade());
+            clazz.setGrade(Integer.valueOf(clazzDTO.getGrade()));
             if (StringUtils.isNotBlank(clazzDTO.getHeadTeacherId())) {
                 Teacher teacher = new Teacher();
                 teacher.setTeacherId(Long.valueOf(clazzDTO.getHeadTeacherId()));
@@ -102,7 +105,17 @@ public class ClazzDTO {
             ClazzDTO clazzDTO = new ClazzDTO();
             clazzDTO.setClazzId(clazz.getClazzId());
             clazzDTO.setStartClazzNum(clazz.getClazzNum());
-            clazzDTO.setGrade(clazz.getGrade());
+            Date gradeDate = DateUtils.parseDate(clazz.getGrade().toString() + "-08-31 00:00:00", DateUtils.FORMAT_V2);
+            Long gradeLong = new Date().getTime() - gradeDate.getTime();
+            String gradeStr;
+            if (gradeLong < 31536000000L) {
+                gradeStr = "高一 ";
+            } else if (gradeLong < 2 * 31536000000L ) {
+                gradeStr = "高二 ";
+            } else {
+                gradeStr = "高三 ";
+            }
+            clazzDTO.setGrade(gradeStr);
             if (clazz.getStudents() != null) {
                 clazzDTO.setStudentNum(clazz.getStudents().size());
             } else {

@@ -6,6 +6,7 @@ import com.github.pagehelper.PageInfo;
 import com.zhr.student.common.MyPage;
 import com.zhr.student.entity.Clazz;
 import com.zhr.student.service.ClazzService;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -28,9 +29,9 @@ public class ClazzController {
                                         @RequestParam(value = "headTeacherName", required = false) String headTeacherName,
                                         @RequestParam(value = "pageNo", required = false, defaultValue = "1") Integer pageNo,
                                         @RequestParam(value = "pageSize", required = false, defaultValue = "5") Integer pageSize) {
-        if ("".equals(headTeacherName)) {
+        if (StringUtils.isBlank(headTeacherName)) {
             headTeacherName = null;
-        } else if (headTeacherName != null){
+        } else {
             headTeacherName = "%" + headTeacherName + "%";
         }
         Page<Clazz> clazzPage =  clazzService.listClazzByPage(grade, clazzNum, headTeacherName, pageNo, pageSize);

@@ -5,19 +5,70 @@ import java.util.List;
 
 public class Teacher {
 
+    public enum TeacherIdentity{
+        /**
+         * 老师是管理员的身份
+         */
+        admin("管理员"),
+
+        /**
+         * 老师是教师的身份
+         */
+        teacher("教师");
+
+        private String value;
+
+        TeacherIdentity(String value) {
+            this.value = value;
+        }
+
+        public String getValue() {
+            return value;
+        }
+
+        public void setValue(String value) {
+            this.value = value;
+        }
+    }
+
+    public enum TeacherGender{
+        /**
+         * 性别为男
+         */
+        male("男"),
+        /**
+         * 性别为女
+         */
+        female("女");
+
+        TeacherGender(String value) {
+            this.value = value;
+        }
+
+        private String value;
+
+        public String getValue() {
+            return value;
+        }
+
+        public void setValue(String value) {
+            this.value = value;
+        }
+    }
+
     private Long teacherId;
 
     private String teacherNum;
 
     private String teacherName;
 
-    private String gender;
+    private TeacherGender gender;
 
     private Date birthday;
 
     private List<Course> courses;
 
-    private String identity;
+    private TeacherIdentity identity;
 
     private String password;
 
@@ -47,11 +98,11 @@ public class Teacher {
         this.teacherName = teacherName;
     }
 
-    public String getGender() {
+    public TeacherGender getGender() {
         return gender;
     }
 
-    public void setGender(String gender) {
+    public void setGender(TeacherGender gender) {
         this.gender = gender;
     }
 
@@ -71,11 +122,11 @@ public class Teacher {
         this.courses = courses;
     }
 
-    public String getIdentity() {
+    public TeacherIdentity getIdentity() {
         return identity;
     }
 
-    public void setIdentity(String identity) {
+    public void setIdentity(TeacherIdentity identity) {
         this.identity = identity;
     }
 

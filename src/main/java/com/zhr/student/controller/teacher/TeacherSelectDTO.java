@@ -9,6 +9,7 @@ import com.zhr.student.entity.Teacher;
 public class TeacherSelectDTO {
     private String id;
     private String name;
+    private String teacherNum;
 
     public String getId() {
         return id;
@@ -26,11 +27,18 @@ public class TeacherSelectDTO {
         this.name = name;
     }
 
+    public String getTeacherNum() {
+        return teacherNum;
+    }
+
+    public void setTeacherNum(String teacherNum) {
+        this.teacherNum = teacherNum;
+    }
+
     public TeacherSelectDTO convertFrom(Teacher teacher){
         TeacherSelectDTOConvert teacherSelectDTOConvert = new TeacherSelectDTOConvert();
         return teacherSelectDTOConvert.reverse().convert(teacher);
     }
-
 
     private static class TeacherSelectDTOConvert extends Converter<TeacherSelectDTO,Teacher> {
 
@@ -44,6 +52,7 @@ public class TeacherSelectDTO {
             TeacherSelectDTO dto = new TeacherSelectDTO();
             dto.setId(String.valueOf(teacher.getTeacherId()));
             dto.setName(teacher.getTeacherName());
+            dto.setTeacherNum(teacher.getTeacherNum());
             return dto;
         }
     }

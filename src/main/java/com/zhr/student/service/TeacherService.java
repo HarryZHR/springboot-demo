@@ -30,4 +30,18 @@ public interface TeacherService {
      * @return teacher collection
      */
     Page<Teacher> listTeacherByPage(String teacherNum, String teacherName, Integer pageNo, Integer pageSize);
+
+    /**
+     * 保存教师
+     * @param teacher 教师参数
+     * @return 保存行数
+     */
+    Integer saveTeacher(Teacher teacher);
+
+    /**
+     * 通过id获取教师对象
+     * @param id 教师id
+     * @return 教师对象
+     */
+    Teacher getTeacherById(Long id);
 }

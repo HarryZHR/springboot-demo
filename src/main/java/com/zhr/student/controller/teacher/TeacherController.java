@@ -6,12 +6,11 @@ import com.zhr.student.entity.Teacher;
 import com.zhr.student.service.TeacherService;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.stream.Collectors;
 
 @RestController
@@ -41,18 +40,52 @@ public class TeacherController {
         return teachers.stream().map(teacher -> new TeacherSelectDTO().convertFrom(teacher)).collect(Collectors.toList());
     }
 
+    /**
+     * 分页获取教师的列表
+     * @param teacherNum 教师的工号
+     * @param teacherName 教师的姓名
+     * @param pageNo 页码
+     * @param pageSize 一页的记录数
+     * @return 教师的分页结果
+     */
     @GetMapping(params = "action=get_page")
     public MyPage getTeacherPage(@RequestParam(value = "teacherNum",required = false) String teacherNum,
-                                                   @RequestParam(value = "teacherName",required = false) String teacherName,
-                                                   @RequestParam(value = "pageNo", required = false, defaultValue = "1") Integer pageNo,
-                                                   @RequestParam(value = "pageSize", required = false, defaultValue = "10") Integer pageSize) {
+                                 @RequestParam(value = "teacherName",required = false) String teacherName,
+                                 @RequestParam(value = "pageNo", required = false, defaultValue = "1") Integer pageNo,
+                                 @RequestParam(value = "pageSize", required = false, defaultValue = "5") Integer pageSize) {
         if (StringUtils.isBlank(teacherName)) {
             teacherName = null;
         } else {
             teacherName = "%" + teacherName + "%";
         }
+        if (StringUtils.isBlank(teacherNum)) {
+            teacherNum = null;
+        }
         Page<Teacher> teacherPage = teacherService.listTeacherByPage(teacherNum, teacherName, pageNo, pageSize);
-        List<TeacherSelectDTO> teacherDTOS = teacherPage.stream().map(teacher -> new TeacherSelectDTO().convertFrom(teacher)).collect(Collectors.toList());
-        return new MyPage(teacherPage, teacherDTOS);
+        List<TeacherSaveDTO> teacherDTOS = teacherPage.stream().map(teacher -> new TeacherSaveDTO().convertFrom(teacher)).collect(Collectors.toList());
+             return new MyPage(teacherPage, teacherDTOS);
+    }
+
+    /**
+     * 保存教师对象
+     * @param teacherSaveDTO 前端传入的参数
+     * @return 保存结果
+     */
+    @PostMapping(params = "action=save_one")
+    public Map<String, Integer> saveTeacher(@RequestBody TeacherSaveDTO teacherSaveDTO) {
+        Map<String, Integer> resultMap = new HashMap<>();
+    resultMap.put("colNum", teacherService.saveTeacher(teacherSaveDTO.convertTo()));
+        return resultMap;
+    }
+
+    /**
+     * 通过id获取教师
+     * @param teacherId 教师id
+     * @return 教师DTO
+     */
+    @GetMapping(value = "/{teacherId}", params = "action=get_one")
+    public TeacherSaveDTO getTeacher(@PathVariable Long teacherId) {
+        Teacher teacher = teacherService.getTeacherById(teacherId);
+        return new TeacherSaveDTO().convertFrom(teacher);
     }
 }
