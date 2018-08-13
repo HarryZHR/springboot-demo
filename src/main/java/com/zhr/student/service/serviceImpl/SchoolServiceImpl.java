@@ -1,7 +1,7 @@
 package com.zhr.student.service.serviceImpl;
 
-import com.zhr.student.entity.School;
 import com.zhr.student.dao.SchoolDAO;
+import com.zhr.student.entity.School;
 import com.zhr.student.service.SchoolService;
 import org.springframework.stereotype.Service;
 

@@ -1,4 +1,4 @@
-package com.zhr.student.controller.teacher;
+package com.zhr.student.dto.teacher;
 
 import com.google.common.base.Converter;
 import com.zhr.student.entity.Teacher;
@@ -35,12 +35,12 @@ public class TeacherSelectDTO {
         this.teacherNum = teacherNum;
     }
 
-    public TeacherSelectDTO convertFrom(Teacher teacher){
+    public TeacherSelectDTO convertFrom(Teacher teacher) {
         TeacherSelectDTOConvert teacherSelectDTOConvert = new TeacherSelectDTOConvert();
         return teacherSelectDTOConvert.reverse().convert(teacher);
     }
 
-    private static class TeacherSelectDTOConvert extends Converter<TeacherSelectDTO,Teacher> {
+    private static class TeacherSelectDTOConvert extends Converter<TeacherSelectDTO, Teacher> {
 
         @Override
         protected Teacher doForward(TeacherSelectDTO teacherSelectDTO) {

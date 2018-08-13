@@ -1,14 +1,13 @@
 package com.zhr.student.dao;
 
-import com.zhr.student.entity.Student;
 import org.apache.ibatis.annotations.Mapper;
-import org.apache.ibatis.annotations.Select;
 
-import java.util.List;
-
+/**
+ * 学生的dao层
+ *
+ * @author Harry
+ */
 @Mapper
 public interface StudentDAO {
 
-    @Select("SELECT * FROM student")
-    List<Student> listStudent();
 }

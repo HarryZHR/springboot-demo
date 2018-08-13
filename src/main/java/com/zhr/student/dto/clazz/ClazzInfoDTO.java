@@ -1,4 +1,4 @@
-package com.zhr.student.controller.clazz;
+package com.zhr.student.dto.clazz;
 
 import java.util.List;
 

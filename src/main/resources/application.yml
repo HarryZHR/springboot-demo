@@ -3,7 +3,7 @@ server:
 spring:
   datasource:
     username: root
-    password: 1234
+    password: root
     url: jdbc:mysql://localhost:3306/student?useUnicode=true&zeroDateTimeBehavior=convertToNull&characterEncoding=UTF-8&autoReconnect=true
     driver-class-name: com.mysql.jdbc.Driver
     type: com.alibaba.druid.pool.DruidDataSource

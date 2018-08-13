@@ -1,7 +1,6 @@
-package com.zhr.student.controller.teacher;
+package com.zhr.student.dto.teacher;
 
 import com.google.common.base.Converter;
-import com.zhr.student.common.util.DateUtils;
 import com.zhr.student.entity.Teacher;
 
 public class TeacherSaveDTO {
@@ -79,7 +78,7 @@ public class TeacherSaveDTO {
             teacher.setTeacherNum(teacherSaveDTO.teacherNum);
             teacher.setTeacherName(teacherSaveDTO.teacherName);
             teacher.setGender(Teacher.TeacherGender.valueOf(teacherSaveDTO.getTeacherGender()));
-            teacher.setBirthday(DateUtils.parseDate(teacherSaveDTO.getTeacherBirthday(), DateUtils.FORMAT_V2));
+//            teacher.setBirthday(DateUtils.parseDate(teacherSaveDTO.getTeacherBirthday(), DateUtils.FORMAT_V2));
             return teacher;
         }
 
@@ -87,8 +86,8 @@ public class TeacherSaveDTO {
         protected TeacherSaveDTO doBackward(Teacher teacher) {
             TeacherSaveDTO teacherSaveDTO = new TeacherSaveDTO();
             teacherSaveDTO.setTeacherId(teacher.getTeacherId());
-            teacherSaveDTO.setTeacherBirthday(DateUtils.formatDate(teacher.getBirthday(), DateUtils.FORMAT_V2));
-            teacherSaveDTO.setTeacherAge(DateUtils.getAge(teacher.getBirthday()));
+         /*   teacherSaveDTO.setTeacherBirthday(DateUtils.formatDate(teacher.getBirthday(), DateUtils.FORMAT_V2));
+            teacherSaveDTO.setTeacherAge(DateUtils.getAge(teacher.getBirthday()));*/
             teacherSaveDTO.setTeacherGender(teacher.getGender().getValue());
             teacherSaveDTO.setTeacherName(teacher.getTeacherName());
             teacherSaveDTO.setTeacherNum(teacher.getTeacherNum());

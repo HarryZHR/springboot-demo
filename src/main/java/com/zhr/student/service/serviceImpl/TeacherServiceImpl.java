@@ -2,11 +2,12 @@ package com.zhr.student.service.serviceImpl;
 
 import com.github.pagehelper.Page;
 import com.github.pagehelper.PageHelper;
-import com.zhr.student.entity.School;
-import com.zhr.student.entity.Teacher;
 import com.zhr.student.dao.SchoolDAO;
 import com.zhr.student.dao.TeacherDAO;
+import com.zhr.student.entity.School;
+import com.zhr.student.entity.Teacher;
 import com.zhr.student.service.TeacherService;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
@@ -34,6 +35,14 @@ public class TeacherServiceImpl implements TeacherService {
 
     @Override
     public Page<Teacher> listTeacherByPage(String teacherNum, String teacherName, Integer pageNo, Integer pageSize) {
+        if (StringUtils.isBlank(teacherName)) {
+            teacherName = null;
+        } else {
+            teacherName = "%" + teacherName + "%";
+        }
+        if (StringUtils.isBlank(teacherNum)) {
+            teacherNum = null;
+        }
         PageHelper.startPage(pageNo, pageSize);
         return teacherDAO.listTeacherByPage(teacherNum, teacherName);
     }

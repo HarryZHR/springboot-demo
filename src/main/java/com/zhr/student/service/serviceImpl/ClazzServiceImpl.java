@@ -2,11 +2,12 @@ package com.zhr.student.service.serviceImpl;
 
 import com.github.pagehelper.Page;
 import com.github.pagehelper.PageHelper;
-import com.zhr.student.entity.Clazz;
-import com.zhr.student.entity.School;
 import com.zhr.student.dao.ClazzDAO;
 import com.zhr.student.dao.SchoolDAO;
+import com.zhr.student.entity.Clazz;
+import com.zhr.student.entity.School;
 import com.zhr.student.service.ClazzService;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -25,9 +26,14 @@ public class ClazzServiceImpl implements ClazzService {
 
     @Transactional(readOnly = true)
     @Override
-    public Page<Clazz> listClazzByPage(Integer grade, Integer clazzNum, String headTeacher, Integer pageNo, Integer pageSize) {
+    public Page<Clazz> listClazzByPage(Integer grade, Integer clazzNum, String headTeacherName, Integer pageNo, Integer pageSize) {
+        if (StringUtils.isBlank(headTeacherName)) {
+            headTeacherName = null;
+        } else {
+            headTeacherName = "%" + headTeacherName + "%";
+        }
         PageHelper.startPage(pageNo, pageSize);
-        return clazzDAO.listClazzByPage(grade, clazzNum, headTeacher);
+        return clazzDAO.listClazzByPage(grade, clazzNum, headTeacherName);
     }
 
     @Override
@@ -44,7 +50,7 @@ public class ClazzServiceImpl implements ClazzService {
 
     @Override
     public Integer saveClazz(Clazz clazz) {
-        if (clazzDAO.findClazzByGradeAndClazzNum(clazz.getGrade(), clazz.getClazzNum(),324234234L) != null){
+        if (clazzDAO.findClazzByGradeAndClazzNum(clazz.getGrade(), clazz.getClazzNum(), 324234234L) != null) {
             return 0;
         } else {
             clazz.setDeleteFlag(true);
@@ -83,7 +89,7 @@ public class ClazzServiceImpl implements ClazzService {
         }
     }
 
-    public Clazz getClazzById(Long id){
+    public Clazz getClazzById(Long id) {
         return clazzDAO.findClazzById(id);
     }
 }

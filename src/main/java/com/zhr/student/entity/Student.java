@@ -1,21 +1,42 @@
 package com.zhr.student.entity;
 
-import java.util.Date;
+import java.time.LocalDateTime;
 
 public class Student {
 
+    /**
+     * 学生的id
+     */
     private Long studentId;
 
+    /**
+     * 学生的学号
+     */
     private String studentNum;
 
+    /**
+     * 学生的姓名
+     */
     private String studentName;
 
+    /**
+     * 学生的性别
+     */
     private String gender;
 
-    private Date birthday;
+    /**
+     * 学生的生日
+     */
+    private LocalDateTime birthday;
 
+    /**
+     * 学生的班级
+     */
     private Clazz clazz;
 
+    /**
+     * 学生账号的登陆密码
+     */
     private String password;
 
     public Long getStudentId() {
@@ -50,11 +71,11 @@ public class Student {
         this.gender = gender;
     }
 
-    public Date getBirthday() {
+    public LocalDateTime getBirthday() {
         return birthday;
     }
 
-    public void setBirthday(Date birthday) {
+    public void setBirthday(LocalDateTime birthday) {
         this.birthday = birthday;
     }
 

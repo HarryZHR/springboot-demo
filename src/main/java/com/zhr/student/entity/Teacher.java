@@ -1,11 +1,10 @@
 package com.zhr.student.entity;
 
-import java.util.Date;
-import java.util.List;
+import java.time.LocalDateTime;
 
 public class Teacher {
 
-    public enum TeacherIdentity{
+    public enum TeacherIdentity {
         /**
          * 老师是管理员的身份
          */
@@ -31,7 +30,7 @@ public class Teacher {
         }
     }
 
-    public enum TeacherGender{
+    public enum TeacherGender {
         /**
          * 性别为男
          */
@@ -56,22 +55,44 @@ public class Teacher {
         }
     }
 
+    /**
+     * 教师的id
+     */
     private Long teacherId;
 
+    /**
+     * 教师的工号
+     */
     private String teacherNum;
 
+    /**
+     * 教师的姓名
+     */
     private String teacherName;
 
+    /**
+     * 教师的性别
+     */
     private TeacherGender gender;
 
-    private Date birthday;
+    /**
+     * 教师的生日
+     */
+    private LocalDateTime birthday;
 
-    private List<Course> courses;
-
+    /**
+     * 教师的身份 管理员还是教师
+     */
     private TeacherIdentity identity;
 
+    /**
+     * 教师的登陆密码
+     */
     private String password;
 
+    /**
+     * 所属的学校
+     */
     private School school;
 
     public Long getTeacherId() {
@@ -106,21 +127,14 @@ public class Teacher {
         this.gender = gender;
     }
 
-    public Date getBirthday() {
+    public LocalDateTime getBirthday() {
         return birthday;
     }
 
-    public void setBirthday(Date birthday) {
+    public void setBirthday(LocalDateTime birthday) {
         this.birthday = birthday;
     }
 
-    public List<Course> getCourses() {
-        return courses;
-    }
-
-    public void setCourses(List<Course> courses) {
-        this.courses = courses;
-    }
 
     public TeacherIdentity getIdentity() {
         return identity;

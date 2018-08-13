@@ -9,6 +9,11 @@ import org.springframework.web.bind.annotation.RequestParam;
 import java.util.Collection;
 import java.util.List;
 
+/**
+ * 班级的dao层
+ *
+ * @author Harry
+ */
 @Mapper
 public interface ClazzDAO {
 
@@ -42,8 +47,8 @@ public interface ClazzDAO {
 
     @Select("SELECT * FROM `clazz` WHERE grade = #{grade} AND clazz_num = #{clazzNum} AND school_id = #{schoolId} AND delete_flag = TRUE")
     Clazz findClazzByGradeAndClazzNum(@Param(value = "grade") Integer grade,
-                                     @Param(value = "clazzNum") Integer clazzNum,
-                                     @Param(value = "schoolId") Long schoolId);
+                                      @Param(value = "clazzNum") Integer clazzNum,
+                                      @Param(value = "schoolId") Long schoolId);
 
     @Insert("INSERT INTO `clazz` VALUES (#{clazzId}, #{grade}, #{clazzNum}, #{headTeacher.teacherId}, #{deleteFlag}, #{school.schoolId})")
     @SelectKey(statement = "select LAST_INSERT_ID()", keyProperty = "clazzId", before = false, resultType = java.lang.Long.class)
