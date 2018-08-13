@@ -2,6 +2,11 @@ package com.zhr.student.dto.clazz;
 
 import java.util.List;
 
+/**
+ * 班级的年级和班级号的信息
+ *
+ * @author Harry
+ */
 public class ClazzInfoDTO {
     private List<Integer> clazzNums;
     private List<Integer> grades;
@@ -20,5 +25,13 @@ public class ClazzInfoDTO {
 
     public void setGrades(List<Integer> grades) {
         this.grades = grades;
+    }
+
+    @Override
+    public String toString() {
+        return "ClazzInfoDTO{" +
+                "clazzNums=" + clazzNums +
+                ", grades=" + grades +
+                '}';
     }
 }

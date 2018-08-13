@@ -5,13 +5,18 @@ import com.zhr.student.entity.Clazz;
 import com.zhr.student.entity.Teacher;
 import org.apache.commons.lang3.StringUtils;
 
+/**
+ * 班级的返回数据
+ *
+ * @author Harry
+ */
 public class ClazzDTO {
     private Long clazzId;
     private String headTeacherId;
+    private String headTeacherName;
     private String grade;
     private Integer startClazzNum;
     private Integer endClazzNum;
-    private String headTeacherName;
     private Integer studentNum;
 
     public Long getClazzId() {
@@ -71,16 +76,16 @@ public class ClazzDTO {
     }
 
     public Clazz convertTo() {
-        ClazzDTOConvert clazzDTOConvert = new ClazzDTOConvert();
+        ClazzDtoConvert clazzDTOConvert = new ClazzDtoConvert();
         return clazzDTOConvert.convert(this);
     }
 
     public ClazzDTO convertFrom(Clazz clazz) {
-        ClazzDTOConvert clazzDTOConvert = new ClazzDTOConvert();
+        ClazzDtoConvert clazzDTOConvert = new ClazzDtoConvert();
         return clazzDTOConvert.reverse().convert(clazz);
     }
 
-    private static class ClazzDTOConvert extends Converter<ClazzDTO, Clazz> {
+    private static class ClazzDtoConvert extends Converter<ClazzDTO, Clazz> {
 
         @Override
         protected Clazz doForward(ClazzDTO clazzDTO) {
@@ -127,4 +132,16 @@ public class ClazzDTO {
         }
     }
 
+    @Override
+    public String toString() {
+        return "ClazzDTO{" +
+                "clazzId=" + clazzId +
+                ", headTeacherId='" + headTeacherId + '\'' +
+                ", grade='" + grade + '\'' +
+                ", startClazzNum=" + startClazzNum +
+                ", endClazzNum=" + endClazzNum +
+                ", headTeacherName='" + headTeacherName + '\'' +
+                ", studentNum=" + studentNum +
+                '}';
+    }
 }

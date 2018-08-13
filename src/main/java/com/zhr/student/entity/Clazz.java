@@ -2,6 +2,11 @@ package com.zhr.student.entity;
 
 import java.util.List;
 
+/**
+ * 班级对象
+ *
+ * @author Harry
+ */
 public class Clazz {
 
     /**

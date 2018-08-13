@@ -2,6 +2,11 @@ package com.zhr.student.entity;
 
 import java.time.LocalDateTime;
 
+/**
+ * 教师对象
+ *
+ * @author Harry
+ */
 public class Teacher {
 
     public enum TeacherIdentity {

@@ -1,11 +1,10 @@
 package com.zhr.student.service;
 
-import com.zhr.student.entity.Student;
-
-import java.util.List;
-
+/**
+ * 学生的服务层接口
+ *
+ * @author Harry
+ */
 public interface StudentService {
-
-    List<Student> listStudent();
 
 }

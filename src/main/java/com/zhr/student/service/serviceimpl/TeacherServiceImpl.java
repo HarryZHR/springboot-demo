@@ -1,4 +1,4 @@
-package com.zhr.student.service.serviceImpl;
+package com.zhr.student.service.serviceimpl;
 
 import com.github.pagehelper.Page;
 import com.github.pagehelper.PageHelper;
@@ -13,6 +13,11 @@ import org.springframework.stereotype.Service;
 import javax.annotation.Resource;
 import java.util.List;
 
+/**
+ * 教师的服务层
+ *
+ * @author Harry
+ */
 @Service
 public class TeacherServiceImpl implements TeacherService {
 

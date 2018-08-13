@@ -39,21 +39,53 @@ public interface ClazzDAO {
                                 @Param(value = "clazzNum") Integer clazzNum,
                                 @Param(value = "headTeacherName") String headTeacherName);
 
+    /**
+     * 获取当前学校中的所有年级
+     *
+     * @param schoolId 学校id
+     * @return 所有年级的集合
+     */
     @Select("SELECT grade FROM `clazz` WHERE school_id = #{schoolId} AND delete_flag = TRUE GROUP BY grade")
     List<Integer> listGradeAll(@Param(value = "schoolId") Long schoolId);
 
+    /**
+     * 获取当前学校的所有班级号
+     *
+     * @param schoolId 学校id
+     * @return 所有班级号的集合
+     */
     @Select("SELECT clazz_num FROM `clazz` WHERE school_id = #{schoolId} AND delete_flag = TRUE GROUP BY clazz_num")
     List<Integer> listClazzNumAll(@Param(value = "schoolId") Long schoolId);
 
+    /**
+     * 通过年级和班级号获取班级对象
+     *
+     * @param grade    年级
+     * @param clazzNum 班级号
+     * @param schoolId 学校id
+     * @return 班级
+     */
     @Select("SELECT * FROM `clazz` WHERE grade = #{grade} AND clazz_num = #{clazzNum} AND school_id = #{schoolId} AND delete_flag = TRUE")
     Clazz findClazzByGradeAndClazzNum(@Param(value = "grade") Integer grade,
                                       @Param(value = "clazzNum") Integer clazzNum,
                                       @Param(value = "schoolId") Long schoolId);
 
+    /**
+     * 插入一条班级记录
+     *
+     * @param clazz 班级参数
+     * @return 影响行数
+     */
     @Insert("INSERT INTO `clazz` VALUES (#{clazzId}, #{grade}, #{clazzNum}, #{headTeacher.teacherId}, #{deleteFlag}, #{school.schoolId})")
     @SelectKey(statement = "select LAST_INSERT_ID()", keyProperty = "clazzId", before = false, resultType = java.lang.Long.class)
     Integer saveClazz(Clazz clazz);
 
+    /**
+     * 批量插入班级对象
+     *
+     * @param clazzList 多条班级记录集合
+     * @return 影响行数
+     */
     @Insert({"<script>" +
             " INSERT INTO `clazz` ( grade, clazz_num, head_teacher_id, delete_flag, school_id ) VALUES " +
             "<foreach item='clazz' collection='clazzList' index='index' separator =','>" +
@@ -63,6 +95,12 @@ public interface ClazzDAO {
     @SelectKey(statement = "select LAST_INSERT_ID()", keyProperty = "clazzId", before = false, resultType = java.lang.Long.class)
     Integer saveClazzList(@Param("clazzList") Collection<Clazz> clazzList);
 
+    /**
+     * 通过id得到班级
+     *
+     * @param id 班级id
+     * @return 班级对象
+     */
     @Select("SELECT * FROM `clazz` WHERE clazz_id = #{id}")
     Clazz findClazzById(@RequestParam(value = "id") Long id);
 }

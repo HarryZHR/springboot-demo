@@ -1,4 +1,4 @@
-package com.zhr.student.service.serviceImpl;
+package com.zhr.student.service.serviceimpl;
 
 import com.zhr.student.dao.SchoolDAO;
 import com.zhr.student.entity.School;
@@ -7,6 +7,11 @@ import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
 
+/**
+ * 学校的服务层
+ *
+ * @author Harry
+ */
 @Service
 public class SchoolServiceImpl implements SchoolService {
 

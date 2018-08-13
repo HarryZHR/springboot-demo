@@ -1,4 +1,4 @@
-package com.zhr.student.service.serviceImpl;
+package com.zhr.student.service.serviceimpl;
 
 import com.github.pagehelper.Page;
 import com.github.pagehelper.PageHelper;
@@ -15,6 +15,11 @@ import javax.annotation.Resource;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * 班级的服务层
+ *
+ * @author Harry
+ */
 @Service
 public class ClazzServiceImpl implements ClazzService {
 
@@ -24,7 +29,7 @@ public class ClazzServiceImpl implements ClazzService {
     @Resource
     private SchoolDAO schoolDAO;
 
-    @Transactional(readOnly = true)
+    @Transactional(readOnly = true, rollbackFor = Exception.class)
     @Override
     public Page<Clazz> listClazzByPage(Integer grade, Integer clazzNum, String headTeacherName, Integer pageNo, Integer pageSize) {
         if (StringUtils.isBlank(headTeacherName)) {
@@ -46,22 +51,6 @@ public class ClazzServiceImpl implements ClazzService {
     public List<Integer> listClazzNumAll() {
         School school = schoolDAO.getSchoolById(324234234L);
         return clazzDAO.listClazzNumAll(school.getSchoolId());
-    }
-
-    @Override
-    public Integer saveClazz(Clazz clazz) {
-        if (clazzDAO.findClazzByGradeAndClazzNum(clazz.getGrade(), clazz.getClazzNum(), 324234234L) != null) {
-            return 0;
-        } else {
-            clazz.setDeleteFlag(true);
-            clazz.setSchool(schoolDAO.getSchoolById(324234234L));
-            return clazzDAO.saveClazz(clazz);
-        }
-    }
-
-    @Override
-    public Clazz getClazzByGradeAndClazzNum(Integer grade, Integer clazzNum) {
-        return clazzDAO.findClazzByGradeAndClazzNum(grade, clazzNum, 324234234L);
     }
 
     @Override
@@ -89,6 +78,7 @@ public class ClazzServiceImpl implements ClazzService {
         }
     }
 
+    @Override
     public Clazz getClazzById(Long id) {
         return clazzDAO.findClazzById(id);
     }

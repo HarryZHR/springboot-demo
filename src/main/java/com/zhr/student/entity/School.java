@@ -1,5 +1,10 @@
 package com.zhr.student.entity;
 
+/**
+ * 学校的对象
+ *
+ * @author Harry
+ */
 public class School {
     /**
      * 学校的id
@@ -26,6 +31,5 @@ public class School {
     public void setSchoolName(String schoolName) {
         this.schoolName = schoolName;
     }
-
 
 }

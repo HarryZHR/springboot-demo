@@ -62,7 +62,7 @@ public class ClazzController {
      */
     @PostMapping(params = "action=save_list")
     public Result saveClazzList(@RequestBody ClazzDTO clazzDTO) {
-        Map<String, Integer> resultMap = new HashMap<>();
+        Map<String, Integer> resultMap = new HashMap<>(1);
         resultMap.put("colNum", clazzService.saveClazzList(clazzDTO.convertTo(), clazzDTO.getEndClazzNum()));
         return new Result<>(resultMap);
     }

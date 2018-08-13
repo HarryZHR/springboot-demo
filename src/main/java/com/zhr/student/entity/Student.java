@@ -2,6 +2,11 @@ package com.zhr.student.entity;
 
 import java.time.LocalDateTime;
 
+/**
+ * 学生对象
+ *
+ * @author Harry
+ */
 public class Student {
 
     /**

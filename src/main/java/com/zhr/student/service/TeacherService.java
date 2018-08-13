@@ -5,6 +5,11 @@ import com.zhr.student.entity.Teacher;
 
 import java.util.List;
 
+/**
+ * 教师的服务层接口
+ *
+ * @author Harry
+ */
 public interface TeacherService {
 
     /**

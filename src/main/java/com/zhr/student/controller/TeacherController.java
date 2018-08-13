@@ -3,7 +3,6 @@ package com.zhr.student.controller;
 import com.github.pagehelper.Page;
 import com.zhr.student.common.result.Result;
 import com.zhr.student.dto.teacher.TeacherSaveDTO;
-import com.zhr.student.dto.teacher.TeacherSelectDTO;
 import com.zhr.student.entity.Teacher;
 import com.zhr.student.service.TeacherService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -51,8 +50,8 @@ public class TeacherController {
     @GetMapping(params = "action=get_all")
     public Result getTeacherAll() {
         List<Teacher> teachers = teacherService.listTeacher();
-        List<TeacherSelectDTO> teacherSelectDTOS = teachers.stream().map(teacher -> new TeacherSelectDTO().convertFrom(teacher)).collect(Collectors.toList());
-        return new Result<>(teacherSelectDTOS);
+        List<TeacherSaveDTO> teacherSaveDTOS = teachers.stream().map(teacher -> new TeacherSaveDTO().convertFrom(teacher)).collect(Collectors.toList());
+        return new Result<>(teacherSaveDTOS);
     }
 
     /**
@@ -83,7 +82,7 @@ public class TeacherController {
      */
     @PostMapping(params = "action=save_one")
     public Result saveTeacher(@RequestBody TeacherSaveDTO teacherSaveDTO) {
-        Map<String, Integer> resultMap = new HashMap<>();
+        Map<String, Integer> resultMap = new HashMap<>(1);
         resultMap.put("colNum", teacherService.saveTeacher(teacherSaveDTO.convertTo()));
         return new Result<>(resultMap);
     }
