@@ -49,7 +49,7 @@ public class ClazzController {
      */
     @GetMapping(params = "action=get_clazz_info")
     public Result getClazzInfo() {
-        List<Integer> grades = clazzService.listGradeAll();
+        List<String> grades = clazzService.listGradeAll();
         List<Integer> clazzNums = clazzService.listClazzNumAll();
         ClazzInfoDTO clazzInfoDTO = new ClazzInfoDTO();
         clazzInfoDTO.setClazzNums(clazzNums);

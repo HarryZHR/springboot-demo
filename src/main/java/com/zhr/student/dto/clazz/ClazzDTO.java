@@ -1,9 +1,14 @@
 package com.zhr.student.dto.clazz;
 
+import com.alibaba.fastjson.JSON;
 import com.google.common.base.Converter;
+import com.zhr.student.common.util.ClazzGradeUtils;
+import com.zhr.student.common.util.DateUtils;
 import com.zhr.student.entity.Clazz;
 import com.zhr.student.entity.Teacher;
 import org.apache.commons.lang3.StringUtils;
+
+import java.time.LocalDateTime;
 
 /**
  * 班级的返回数据
@@ -12,12 +17,22 @@ import org.apache.commons.lang3.StringUtils;
  */
 public class ClazzDTO {
     private Long clazzId;
-    private String headTeacherId;
+    private Long headTeacherId;
     private String headTeacherName;
-    private String grade;
+    private Integer grade;
     private Integer startClazzNum;
     private Integer endClazzNum;
     private Integer studentNum;
+    private String type;
+    private String clazzName;
+
+    public String getClazzName() {
+        return clazzName;
+    }
+
+    public void setClazzName(String clazzName) {
+        this.clazzName = clazzName;
+    }
 
     public Long getClazzId() {
         return clazzId;
@@ -27,19 +42,19 @@ public class ClazzDTO {
         this.clazzId = clazzId;
     }
 
-    public String getHeadTeacherId() {
+    public Long getHeadTeacherId() {
         return headTeacherId;
     }
 
-    public void setHeadTeacherId(String headTeacherId) {
+    public void setHeadTeacherId(Long headTeacherId) {
         this.headTeacherId = headTeacherId;
     }
 
-    public String getGrade() {
+    public Integer getGrade() {
         return grade;
     }
 
-    public void setGrade(String grade) {
+    public void setGrade(Integer grade) {
         this.grade = grade;
     }
 
@@ -75,6 +90,14 @@ public class ClazzDTO {
         this.studentNum = studentNum;
     }
 
+    public String getType() {
+        return type;
+    }
+
+    public void setType(String type) {
+        this.type = type;
+    }
+
     public Clazz convertTo() {
         ClazzDtoConvert clazzDTOConvert = new ClazzDtoConvert();
         return clazzDTOConvert.convert(this);
@@ -91,10 +114,11 @@ public class ClazzDTO {
         protected Clazz doForward(ClazzDTO clazzDTO) {
             Clazz clazz = new Clazz();
             clazz.setClazzNum(clazzDTO.getStartClazzNum());
-            clazz.setGrade(Integer.valueOf(clazzDTO.getGrade()));
-            if (StringUtils.isNotBlank(clazzDTO.getHeadTeacherId())) {
+            clazz.setGrade(clazzDTO.getGrade());
+            clazz.setType(Clazz.ClazzType.valueOf(clazzDTO.getType()));
+            if (clazzDTO.getHeadTeacherId() != null) {
                 Teacher teacher = new Teacher();
-                teacher.setTeacherId(Long.valueOf(clazzDTO.getHeadTeacherId()));
+                teacher.setTeacherId(clazzDTO.getHeadTeacherId());
                 clazz.setHeadTeacher(teacher);
             } else {
                 clazz.setHeadTeacher(null);
@@ -107,17 +131,9 @@ public class ClazzDTO {
             ClazzDTO clazzDTO = new ClazzDTO();
             clazzDTO.setClazzId(clazz.getClazzId());
             clazzDTO.setStartClazzNum(clazz.getClazzNum());
-            /*Date gradeDate = DateUtils.parseDate(clazz.getGrade().toString() + "-08-31 00:00:00", DateUtils.FORMAT_V2);
-            Long gradeLong = new Date().getTime() - gradeDate.getTime();
-            String gradeStr;
-            if (gradeLong < 31536000000L) {
-                gradeStr = "高一 ";
-            } else if (gradeLong < 2 * 31536000000L) {
-                gradeStr = "高二 ";
-            } else {
-                gradeStr = "高三 ";
-            }
-            clazzDTO.setGrade(gradeStr);*/
+            clazzDTO.setType(ClazzGradeUtils.getGradeName(clazz));
+            clazzDTO.setGrade(clazz.getGrade());
+            clazzDTO.setClazzName(ClazzGradeUtils.getClazzName(clazz));
             if (clazz.getStudents() != null) {
                 clazzDTO.setStudentNum(clazz.getStudents().size());
             } else {
@@ -136,12 +152,13 @@ public class ClazzDTO {
     public String toString() {
         return "ClazzDTO{" +
                 "clazzId=" + clazzId +
-                ", headTeacherId='" + headTeacherId + '\'' +
-                ", grade='" + grade + '\'' +
+                ", headTeacherId=" + headTeacherId +
+                ", headTeacherName='" + headTeacherName + '\'' +
+                ", grade=" + grade +
                 ", startClazzNum=" + startClazzNum +
                 ", endClazzNum=" + endClazzNum +
-                ", headTeacherName='" + headTeacherName + '\'' +
                 ", studentNum=" + studentNum +
+                ", type='" + type + '\'' +
                 '}';
     }
 }

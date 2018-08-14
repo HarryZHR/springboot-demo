@@ -2,6 +2,7 @@ package com.zhr.student.service.serviceimpl;
 
 import com.github.pagehelper.Page;
 import com.github.pagehelper.PageHelper;
+import com.zhr.student.common.util.ClazzGradeUtils;
 import com.zhr.student.dao.ClazzDAO;
 import com.zhr.student.dao.SchoolDAO;
 import com.zhr.student.entity.Clazz;
@@ -14,6 +15,7 @@ import org.springframework.transaction.annotation.Transactional;
 import javax.annotation.Resource;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  * 班级的服务层
@@ -42,9 +44,10 @@ public class ClazzServiceImpl implements ClazzService {
     }
 
     @Override
-    public List<Integer> listGradeAll() {
+    public List<String> listGradeAll() {
         School school = schoolDAO.getSchoolById(324234234L);
-        return clazzDAO.listGradeAll(school.getSchoolId());
+        List<Integer> grades = clazzDAO.listGradeAll(school.getSchoolId());
+        return grades.stream().map(ClazzGradeUtils::getGrade).collect(Collectors.toList());
     }
 
     @Override
@@ -60,10 +63,11 @@ public class ClazzServiceImpl implements ClazzService {
         }
         List<Clazz> clazzList = new ArrayList<>();
         for (int i = clazz.getClazzNum(); i <= endClazzNum; i++) {
-            Clazz dataClazz = clazzDAO.findClazzByGradeAndClazzNum(clazz.getGrade(), i, 324234234L);
+            Clazz dataClazz = clazzDAO.findClazzByGradeAndClazzNum(clazz.getGrade(), i, clazz.getType().toString(), 324234234L);
             if (dataClazz == null) {
                 Clazz newClazz = new Clazz();
                 newClazz.setGrade(clazz.getGrade());
+                newClazz.setType(clazz.getType());
                 newClazz.setClazzNum(i);
                 newClazz.setDeleteFlag(true);
                 newClazz.setHeadTeacher(clazz.getHeadTeacher());
@@ -81,5 +85,10 @@ public class ClazzServiceImpl implements ClazzService {
     @Override
     public Clazz getClazzById(Long id) {
         return clazzDAO.findClazzById(id);
+    }
+
+    @Override
+    public Clazz getClazzByHeadTeacher(Long headTeacherId) {
+        return clazzDAO.findClazzByHeadTeacher(headTeacherId);
     }
 }

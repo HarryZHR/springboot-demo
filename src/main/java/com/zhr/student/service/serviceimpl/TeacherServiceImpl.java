@@ -49,7 +49,7 @@ public class TeacherServiceImpl implements TeacherService {
             teacherNum = null;
         }
         PageHelper.startPage(pageNo, pageSize);
-        return teacherDAO.listTeacherByPage(teacherNum, teacherName);
+        return teacherDAO.listTeacherByPage(teacherNum, teacherName,324234234L);
     }
 
     @Override
@@ -57,6 +57,7 @@ public class TeacherServiceImpl implements TeacherService {
         teacher.setIdentity(Teacher.TeacherIdentity.valueOf("teacher"));
         teacher.setPassword("123456");
         teacher.setSchool(schoolDAO.getSchoolById(324234234L));
+        teacher.setDeleteFlag(true);
         return teacherDAO.saveTeacher(teacher);
     }
 

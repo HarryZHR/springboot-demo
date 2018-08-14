@@ -9,6 +9,24 @@ import java.util.List;
  */
 public class Clazz {
 
+    public enum ClazzType {
+        primary("小学"),
+
+        junior("初中"),
+
+        senior("高中");
+
+        private String value;
+
+        ClazzType(String value) {
+            this.value = value;
+        }
+
+        public String getValue() {
+            return value;
+        }
+    }
+
     /**
      * 班级的id
      */
@@ -23,6 +41,11 @@ public class Clazz {
      * 班级号
      */
     private Integer clazzNum;
+
+    /**
+     * 初中还是高中
+     */
+    private ClazzType type;
 
     /**
      * 班主任
@@ -100,4 +123,11 @@ public class Clazz {
         this.school = school;
     }
 
+    public ClazzType getType() {
+        return type;
+    }
+
+    public void setType(ClazzType type) {
+        this.type = type;
+    }
 }

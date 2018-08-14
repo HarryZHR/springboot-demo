@@ -2,6 +2,7 @@ package com.zhr.student.service;
 
 import com.github.pagehelper.Page;
 import com.zhr.student.entity.Clazz;
+import org.checkerframework.checker.units.qual.C;
 
 import java.util.List;
 
@@ -29,7 +30,7 @@ public interface ClazzService {
      *
      * @return 年级集合
      */
-    List<Integer> listGradeAll();
+    List<String> listGradeAll();
 
     /**
      * 获取所有的班级号
@@ -54,4 +55,11 @@ public interface ClazzService {
      * @return 班级对象
      */
     Clazz getClazzById(Long id);
+
+    /**
+     * 查找教师担任班主任的班级
+     * @param headTeacherId 教师id
+     * @return 班级
+     */
+    Clazz getClazzByHeadTeacher(Long headTeacherId);
 }

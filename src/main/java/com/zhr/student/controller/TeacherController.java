@@ -2,8 +2,11 @@ package com.zhr.student.controller;
 
 import com.github.pagehelper.Page;
 import com.zhr.student.common.result.Result;
+import com.zhr.student.common.util.ClazzGradeUtils;
 import com.zhr.student.dto.teacher.TeacherSaveDTO;
+import com.zhr.student.entity.Clazz;
 import com.zhr.student.entity.Teacher;
+import com.zhr.student.service.ClazzService;
 import com.zhr.student.service.TeacherService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -24,10 +27,14 @@ public class TeacherController {
 
     private final TeacherService teacherService;
 
+    private final ClazzService clazzService;
+
     @Autowired
-    public TeacherController(TeacherService teacherService) {
+    public TeacherController(TeacherService teacherService, ClazzService clazzService) {
         this.teacherService = teacherService;
+        this.clazzService = clazzService;
     }
+
 
     /**
      * 教师登陆操作
@@ -70,7 +77,14 @@ public class TeacherController {
                                  @RequestParam(value = "pageSize", required = false, defaultValue = "5") Integer pageSize) {
 
         Page<Teacher> teacherPage = teacherService.listTeacherByPage(teacherNum, teacherName, pageNo, pageSize);
-        List<TeacherSaveDTO> teacherDTOS = teacherPage.stream().map(teacher -> new TeacherSaveDTO().convertFrom(teacher)).collect(Collectors.toList());
+        List<TeacherSaveDTO> teacherDTOS = teacherPage.stream().map(teacher -> {
+            TeacherSaveDTO dto = new TeacherSaveDTO().convertFrom(teacher);
+            Clazz clazz = clazzService.getClazzByHeadTeacher(teacher.getTeacherId());
+            if (clazz != null) {
+                dto.setClazzName(ClazzGradeUtils.getClazzName(clazz));
+            }
+            return dto;
+        }).collect(Collectors.toList());
         return new Result<>(teacherDTOS, teacherPage.getPages());
     }
 

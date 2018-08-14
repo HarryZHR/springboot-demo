@@ -44,6 +44,8 @@ public class Student {
      */
     private String password;
 
+    private Boolean deleteFlag;
+
     public Long getStudentId() {
         return studentId;
     }
@@ -100,4 +102,11 @@ public class Student {
         this.password = password;
     }
 
+    public Boolean getDeleteFlag() {
+        return deleteFlag;
+    }
+
+    public void setDeleteFlag(Boolean deleteFlag) {
+        this.deleteFlag = deleteFlag;
+    }
 }

@@ -100,6 +100,11 @@ public class Teacher {
      */
     private School school;
 
+    /**
+     * 是否被删除
+     */
+    private Boolean deleteFlag;
+
     public Long getTeacherId() {
         return teacherId;
     }
@@ -165,4 +170,11 @@ public class Teacher {
         this.school = school;
     }
 
+    public Boolean getDeleteFlag() {
+        return deleteFlag;
+    }
+
+    public void setDeleteFlag(Boolean deleteFlag) {
+        this.deleteFlag = deleteFlag;
+    }
 }

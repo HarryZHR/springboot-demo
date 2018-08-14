@@ -62,23 +62,15 @@ public interface ClazzDAO {
      *
      * @param grade    年级
      * @param clazzNum 班级号
+     * @param type     年级类型
      * @param schoolId 学校id
      * @return 班级
      */
-    @Select("SELECT * FROM `clazz` WHERE grade = #{grade} AND clazz_num = #{clazzNum} AND school_id = #{schoolId} AND delete_flag = TRUE")
+    @Select("SELECT * FROM `clazz` WHERE grade = #{grade} AND clazz_num = #{clazzNum} AND type = #{type} AND school_id = #{schoolId} AND delete_flag = TRUE")
     Clazz findClazzByGradeAndClazzNum(@Param(value = "grade") Integer grade,
                                       @Param(value = "clazzNum") Integer clazzNum,
+                                      @Param(value = "type") String type,
                                       @Param(value = "schoolId") Long schoolId);
-
-    /**
-     * 插入一条班级记录
-     *
-     * @param clazz 班级参数
-     * @return 影响行数
-     */
-    @Insert("INSERT INTO `clazz` VALUES (#{clazzId}, #{grade}, #{clazzNum}, #{headTeacher.teacherId}, #{deleteFlag}, #{school.schoolId})")
-    @SelectKey(statement = "select LAST_INSERT_ID()", keyProperty = "clazzId", before = false, resultType = java.lang.Long.class)
-    Integer saveClazz(Clazz clazz);
 
     /**
      * 批量插入班级对象
@@ -87,9 +79,9 @@ public interface ClazzDAO {
      * @return 影响行数
      */
     @Insert({"<script>" +
-            " INSERT INTO `clazz` ( grade, clazz_num, head_teacher_id, delete_flag, school_id ) VALUES " +
+            " INSERT INTO `clazz` ( grade, clazz_num, type, head_teacher_id, delete_flag, school_id ) VALUES " +
             "<foreach item='clazz' collection='clazzList' index='index' separator =','>" +
-            "(#{clazz.grade}, #{clazz.clazzNum}, #{clazz.headTeacher.teacherId}, #{clazz.deleteFlag}, #{clazz.school.schoolId}) " +
+            "(#{clazz.grade}, #{clazz.clazzNum}, #{clazz.type}, #{clazz.headTeacher.teacherId}, #{clazz.deleteFlag}, #{clazz.school.schoolId}) " +
             "</foreach>" +
             "</script>"})
     @SelectKey(statement = "select LAST_INSERT_ID()", keyProperty = "clazzId", before = false, resultType = java.lang.Long.class)
@@ -101,6 +93,14 @@ public interface ClazzDAO {
      * @param id 班级id
      * @return 班级对象
      */
-    @Select("SELECT * FROM `clazz` WHERE clazz_id = #{id}")
-    Clazz findClazzById(@RequestParam(value = "id") Long id);
+    @Select("SELECT * FROM `clazz` WHERE clazz_id = #{id} AND delete_flag = TRUE")
+    Clazz findClazzById(@Param(value = "id") Long id);
+
+    /**
+     * 根据班主任id获取班级
+     * @param headTeacherId 班主任的id
+     * @return 班级
+     */
+    @Select("SELECT * FROM `clazz` WHERE head_teacher_id = #{headTeacherId} AND delete_flag = TRUE")
+    Clazz findClazzByHeadTeacher(@Param(value = "headTeacherId") Long headTeacherId);
 }

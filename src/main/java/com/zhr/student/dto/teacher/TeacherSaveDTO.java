@@ -16,6 +16,7 @@ public class TeacherSaveDTO {
     private String teacherGender;
     private String teacherBirthday;
     private Integer teacherAge;
+    private String clazzName;
 
     public Long getTeacherId() {
         return teacherId;
@@ -63,6 +64,14 @@ public class TeacherSaveDTO {
 
     public void setTeacherAge(Integer teacherAge) {
         this.teacherAge = teacherAge;
+    }
+
+    public String getClazzName() {
+        return clazzName;
+    }
+
+    public void setClazzName(String clazzName) {
+        this.clazzName = clazzName;
     }
 
     public Teacher convertTo() {
