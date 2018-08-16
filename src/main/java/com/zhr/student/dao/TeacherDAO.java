@@ -2,10 +2,7 @@ package com.zhr.student.dao;
 
 import com.github.pagehelper.Page;
 import com.zhr.student.entity.Teacher;
-import org.apache.ibatis.annotations.Insert;
-import org.apache.ibatis.annotations.Mapper;
-import org.apache.ibatis.annotations.Param;
-import org.apache.ibatis.annotations.Select;
+import org.apache.ibatis.annotations.*;
 
 import java.util.List;
 
@@ -50,14 +47,18 @@ public interface TeacherDAO {
      *
      * @param teacherNum  工号
      * @param teacherName 姓名
-     * @param schoolId 学校的id
+     * @param pageType    排序类型
+     * @param schoolId    学校的id
      * @return 教师的集合
      */
-    @Select("<script>SELECT * FROM `teacher` WHERE identity = 'teacher' AND school_id = #{schoolId} AND delete_flag = TRUE" +
-            "<if test='teacherNum != null'> AND teacher_num = #{teacherNum} </if>" +
-            "<if test='teacherName != null'> AND teacher_name LIKE #{teacherName} </if></script>")
+    @Select("<script>SELECT t1.* from `teacher` t1 LEFT JOIN `clazz` t2 ON t2.head_teacher_id = t1.teacher_id" +
+            " WHERE t1.identity = 'teacher' AND t1.school_id = #{schoolId} AND t1.delete_flag = TRUE " +
+            "<if test='teacherNum != null'> AND t1.teacher_num = #{teacherNum} </if>" +
+            "<if test='teacherName != null'> AND t1.teacher_name LIKE #{teacherName} </if>" +
+            " ORDER BY <if test='pageType != null'> t2.head_teacher_id ASC, </if> t1.teacher_num ASC</script>")
     Page<Teacher> listTeacherByPage(@Param(value = "teacherNum") String teacherNum,
                                     @Param(value = "teacherName") String teacherName,
+                                    @Param(value = "pageType") String pageType,
                                     @Param(value = "schoolId") Long schoolId);
 
     /**
@@ -68,4 +69,13 @@ public interface TeacherDAO {
      */
     @Insert("INSERT INTO `teacher` VALUES (#{teacherId}, #{teacherNum}, #{teacherName}, #{birthday}, #{gender}, #{identity}, #{password}, #{school.schoolId}, #{deleteFlag})")
     Integer saveTeacher(Teacher teacher);
+
+    /**
+     * 更新一条教师的记录
+     *
+     * @param teacher 教师的新信息
+     * @return 影响行数
+     */
+    @Update("UPDATE `teacher` SET teacher_name = #{teacherName}, birthday = #{birthday}, gender = #{gender}, password = #{password}, delete_flag = #{deleteFlag} WHERE teacher_id = #{teacherId}")
+    Integer updateTeacher(Teacher teacher);
 }

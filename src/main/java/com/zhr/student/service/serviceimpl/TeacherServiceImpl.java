@@ -39,7 +39,7 @@ public class TeacherServiceImpl implements TeacherService {
     }
 
     @Override
-    public Page<Teacher> listTeacherByPage(String teacherNum, String teacherName, Integer pageNo, Integer pageSize) {
+    public Page<Teacher> listTeacherByPage(String teacherNum, String teacherName, String pageType, Integer pageNo, Integer pageSize) {
         if (StringUtils.isBlank(teacherName)) {
             teacherName = null;
         } else {
@@ -49,7 +49,7 @@ public class TeacherServiceImpl implements TeacherService {
             teacherNum = null;
         }
         PageHelper.startPage(pageNo, pageSize);
-        return teacherDAO.listTeacherByPage(teacherNum, teacherName,324234234L);
+        return teacherDAO.listTeacherByPage(teacherNum, teacherName, pageType, 324234234L);
     }
 
     @Override
@@ -64,5 +64,16 @@ public class TeacherServiceImpl implements TeacherService {
     @Override
     public Teacher getTeacherById(Long id) {
         return teacherDAO.getTeacherById(id);
+    }
+
+    @Override
+    public Integer updateTeacher(Teacher teacher) {
+        Teacher origin = teacherDAO.getTeacherById(teacher.getTeacherId());
+        if (teacher.getBirthday() != null) {
+            origin.setBirthday(teacher.getBirthday());
+        }
+        origin.setGender(teacher.getGender());
+        origin.setTeacherName(teacher.getTeacherName());
+        return teacherDAO.updateTeacher(origin);
     }
 }

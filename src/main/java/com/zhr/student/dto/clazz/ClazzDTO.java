@@ -1,20 +1,17 @@
 package com.zhr.student.dto.clazz;
 
-import com.alibaba.fastjson.JSON;
 import com.google.common.base.Converter;
 import com.zhr.student.common.util.ClazzGradeUtils;
-import com.zhr.student.common.util.DateUtils;
 import com.zhr.student.entity.Clazz;
 import com.zhr.student.entity.Teacher;
-import org.apache.commons.lang3.StringUtils;
-
-import java.time.LocalDateTime;
+import lombok.Data;
 
 /**
  * 班级的返回数据
  *
  * @author Harry
  */
+@Data
 public class ClazzDTO {
     private Long clazzId;
     private Long headTeacherId;
@@ -25,78 +22,6 @@ public class ClazzDTO {
     private Integer studentNum;
     private String type;
     private String clazzName;
-
-    public String getClazzName() {
-        return clazzName;
-    }
-
-    public void setClazzName(String clazzName) {
-        this.clazzName = clazzName;
-    }
-
-    public Long getClazzId() {
-        return clazzId;
-    }
-
-    public void setClazzId(Long clazzId) {
-        this.clazzId = clazzId;
-    }
-
-    public Long getHeadTeacherId() {
-        return headTeacherId;
-    }
-
-    public void setHeadTeacherId(Long headTeacherId) {
-        this.headTeacherId = headTeacherId;
-    }
-
-    public Integer getGrade() {
-        return grade;
-    }
-
-    public void setGrade(Integer grade) {
-        this.grade = grade;
-    }
-
-    public Integer getStartClazzNum() {
-        return startClazzNum;
-    }
-
-    public void setStartClazzNum(Integer startClazzNum) {
-        this.startClazzNum = startClazzNum;
-    }
-
-    public Integer getEndClazzNum() {
-        return endClazzNum;
-    }
-
-    public void setEndClazzNum(Integer endClazzNum) {
-        this.endClazzNum = endClazzNum;
-    }
-
-    public String getHeadTeacherName() {
-        return headTeacherName;
-    }
-
-    public void setHeadTeacherName(String headTeacherName) {
-        this.headTeacherName = headTeacherName;
-    }
-
-    public Integer getStudentNum() {
-        return studentNum;
-    }
-
-    public void setStudentNum(Integer studentNum) {
-        this.studentNum = studentNum;
-    }
-
-    public String getType() {
-        return type;
-    }
-
-    public void setType(String type) {
-        this.type = type;
-    }
 
     public Clazz convertTo() {
         ClazzDtoConvert clazzDTOConvert = new ClazzDtoConvert();
@@ -116,13 +41,12 @@ public class ClazzDTO {
             clazz.setClazzNum(clazzDTO.getStartClazzNum());
             clazz.setGrade(clazzDTO.getGrade());
             clazz.setType(Clazz.ClazzType.valueOf(clazzDTO.getType()));
+            Teacher teacher = null;
             if (clazzDTO.getHeadTeacherId() != null) {
-                Teacher teacher = new Teacher();
+                teacher = new Teacher();
                 teacher.setTeacherId(clazzDTO.getHeadTeacherId());
-                clazz.setHeadTeacher(teacher);
-            } else {
-                clazz.setHeadTeacher(null);
             }
+            clazz.setHeadTeacher(teacher);
             return clazz;
         }
 

@@ -1,5 +1,8 @@
 package com.zhr.student.entity;
 
+import lombok.Data;
+import lombok.Getter;
+
 import java.util.List;
 
 /**
@@ -7,9 +10,14 @@ import java.util.List;
  *
  * @author Harry
  */
+@Data
 public class Clazz {
 
+    @Getter
     public enum ClazzType {
+        /**
+         * 班级类型为小学
+         */
         primary("小学"),
 
         junior("初中"),
@@ -22,9 +30,6 @@ public class Clazz {
             this.value = value;
         }
 
-        public String getValue() {
-            return value;
-        }
     }
 
     /**
@@ -67,67 +72,4 @@ public class Clazz {
      */
     private List<Student> students;
 
-    public Long getClazzId() {
-        return clazzId;
-    }
-
-    public void setClazzId(Long clazzId) {
-        this.clazzId = clazzId;
-    }
-
-    public Integer getGrade() {
-        return grade;
-    }
-
-    public void setGrade(Integer grade) {
-        this.grade = grade;
-    }
-
-    public Integer getClazzNum() {
-        return clazzNum;
-    }
-
-    public void setClazzNum(Integer clazzNum) {
-        this.clazzNum = clazzNum;
-    }
-
-    public Teacher getHeadTeacher() {
-        return headTeacher;
-    }
-
-    public void setHeadTeacher(Teacher headTeacher) {
-        this.headTeacher = headTeacher;
-    }
-
-    public Boolean getDeleteFlag() {
-        return deleteFlag;
-    }
-
-    public void setDeleteFlag(Boolean deleteFlag) {
-        this.deleteFlag = deleteFlag;
-    }
-
-    public List<Student> getStudents() {
-        return students;
-    }
-
-    public void setStudents(List<Student> students) {
-        this.students = students;
-    }
-
-    public School getSchool() {
-        return school;
-    }
-
-    public void setSchool(School school) {
-        this.school = school;
-    }
-
-    public ClazzType getType() {
-        return type;
-    }
-
-    public void setType(ClazzType type) {
-        this.type = type;
-    }
 }

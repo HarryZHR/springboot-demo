@@ -4,7 +4,6 @@ import com.github.pagehelper.Page;
 import com.zhr.student.entity.Clazz;
 import com.zhr.student.entity.Teacher;
 import org.apache.ibatis.annotations.*;
-import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.Collection;
 import java.util.List;
@@ -94,13 +93,26 @@ public interface ClazzDAO {
      * @return 班级对象
      */
     @Select("SELECT * FROM `clazz` WHERE clazz_id = #{id} AND delete_flag = TRUE")
+    @Results({
+            @Result(property = "headTeacher", column = "head_teacher_id", javaType = Teacher.class,
+                    one = @One(select = "com.zhr.student.dao.TeacherDAO.getTeacherById"))
+    })
     Clazz findClazzById(@Param(value = "id") Long id);
 
     /**
      * 根据班主任id获取班级
+     *
      * @param headTeacherId 班主任的id
      * @return 班级
      */
     @Select("SELECT * FROM `clazz` WHERE head_teacher_id = #{headTeacherId} AND delete_flag = TRUE")
     Clazz findClazzByHeadTeacher(@Param(value = "headTeacherId") Long headTeacherId);
+
+    /**
+     * 修改班级信息
+     * @param clazz 班级的信息
+     * @return 影响行数
+     */
+    @Update("UPDATE `clazz` SET head_teacher_id = #{headTeacher.teacherId}, delete_flag = #{deleteFlag} WHERE clazz_id = #{clazzId}")
+    Integer updateClazz(Clazz clazz);
 }

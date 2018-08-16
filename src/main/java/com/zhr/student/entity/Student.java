@@ -1,5 +1,7 @@
 package com.zhr.student.entity;
 
+import lombok.Data;
+
 import java.time.LocalDateTime;
 
 /**
@@ -7,6 +9,7 @@ import java.time.LocalDateTime;
  *
  * @author Harry
  */
+@Data
 public class Student {
 
     /**
@@ -44,69 +47,10 @@ public class Student {
      */
     private String password;
 
+    /**
+     * 是否删除
+     */
     private Boolean deleteFlag;
 
-    public Long getStudentId() {
-        return studentId;
-    }
 
-    public void setStudentId(Long studentId) {
-        this.studentId = studentId;
-    }
-
-    public String getStudentNum() {
-        return studentNum;
-    }
-
-    public void setStudentNum(String studentNum) {
-        this.studentNum = studentNum;
-    }
-
-    public String getStudentName() {
-        return studentName;
-    }
-
-    public void setStudentName(String studentName) {
-        this.studentName = studentName;
-    }
-
-    public String getGender() {
-        return gender;
-    }
-
-    public void setGender(String gender) {
-        this.gender = gender;
-    }
-
-    public LocalDateTime getBirthday() {
-        return birthday;
-    }
-
-    public void setBirthday(LocalDateTime birthday) {
-        this.birthday = birthday;
-    }
-
-    public Clazz getClazz() {
-        return clazz;
-    }
-
-    public void setClazz(Clazz clazz) {
-        this.clazz = clazz;
-    }
-
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
-    }
-
-    public Boolean getDeleteFlag() {
-        return deleteFlag;
-    }
-
-    public void setDeleteFlag(Boolean deleteFlag) {
-        this.deleteFlag = deleteFlag;
-    }
 }

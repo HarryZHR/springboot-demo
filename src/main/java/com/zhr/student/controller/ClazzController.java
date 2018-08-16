@@ -4,6 +4,7 @@ import com.github.pagehelper.Page;
 import com.zhr.student.common.result.Result;
 import com.zhr.student.dto.clazz.ClazzDTO;
 import com.zhr.student.dto.clazz.ClazzInfoDTO;
+import com.zhr.student.dto.clazz.ClazzUpdateDTO;
 import com.zhr.student.entity.Clazz;
 import com.zhr.student.service.ClazzService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -35,7 +36,7 @@ public class ClazzController {
                               @RequestParam(value = "clazzNum", required = false) Integer clazzNum,
                               @RequestParam(value = "headTeacherName", required = false) String headTeacherName,
                               @RequestParam(value = "pageNo", required = false, defaultValue = "1") Integer pageNo,
-                              @RequestParam(value = "pageSize", required = false, defaultValue = "5") Integer pageSize) {
+                              @RequestParam(value = "pageSize", required = false, defaultValue = "10") Integer pageSize) {
 
         Page<Clazz> clazzPage = clazzService.listClazzByPage(grade, clazzNum, headTeacherName, pageNo, pageSize);
         List<ClazzDTO> clazzDTOS = clazzPage.stream().map(clazz -> new ClazzDTO().convertFrom(clazz)).collect(Collectors.toList());
@@ -77,6 +78,23 @@ public class ClazzController {
     public Result getClazz(@PathVariable Long clazzId) {
         ClazzDTO clazzDTO = new ClazzDTO().convertFrom(clazzService.getClazzById(clazzId));
         return new Result<>(clazzDTO);
+    }
+
+    /**
+     * 更新班级信息
+     *
+     * @param clazzId  班级的id
+     * @param clazzDTO 班级的信息
+     * @return 更新了多少条
+     */
+    @PutMapping(value = "/{clazzId}")
+    public Result updateClazz(@PathVariable Long clazzId,
+                              @RequestBody ClazzUpdateDTO clazzDTO) {
+        Map<String, Integer> resMap = new HashMap<>(1);
+        Clazz clazz = clazzDTO.convertTo();
+        clazz.setClazzId(clazzId);
+        resMap.put("colNum", clazzService.updateClazz(clazz));
+        return new Result<>(resMap);
     }
 
 }

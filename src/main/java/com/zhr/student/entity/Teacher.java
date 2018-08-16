@@ -1,12 +1,16 @@
 package com.zhr.student.entity;
 
-import java.time.LocalDateTime;
+import lombok.Data;
+import lombok.Getter;
+
+import java.time.LocalDate;
 
 /**
  * 教师对象
  *
  * @author Harry
  */
+@Data
 public class Teacher {
 
     public enum TeacherIdentity {
@@ -20,19 +24,13 @@ public class Teacher {
          */
         teacher("教师");
 
+        @Getter
         private String value;
 
         TeacherIdentity(String value) {
             this.value = value;
         }
 
-        public String getValue() {
-            return value;
-        }
-
-        public void setValue(String value) {
-            this.value = value;
-        }
     }
 
     public enum TeacherGender {
@@ -83,7 +81,7 @@ public class Teacher {
     /**
      * 教师的生日
      */
-    private LocalDateTime birthday;
+    private LocalDate birthday;
 
     /**
      * 教师的身份 管理员还是教师
@@ -105,76 +103,8 @@ public class Teacher {
      */
     private Boolean deleteFlag;
 
-    public Long getTeacherId() {
-        return teacherId;
-    }
-
-    public void setTeacherId(Long teacherId) {
-        this.teacherId = teacherId;
-    }
-
-    public String getTeacherNum() {
-        return teacherNum;
-    }
-
-    public void setTeacherNum(String teacherNum) {
-        this.teacherNum = teacherNum;
-    }
-
-    public String getTeacherName() {
-        return teacherName;
-    }
-
-    public void setTeacherName(String teacherName) {
-        this.teacherName = teacherName;
-    }
-
-    public TeacherGender getGender() {
-        return gender;
-    }
-
-    public void setGender(TeacherGender gender) {
-        this.gender = gender;
-    }
-
-    public LocalDateTime getBirthday() {
-        return birthday;
-    }
-
-    public void setBirthday(LocalDateTime birthday) {
-        this.birthday = birthday;
-    }
-
-
-    public TeacherIdentity getIdentity() {
-        return identity;
-    }
-
-    public void setIdentity(TeacherIdentity identity) {
-        this.identity = identity;
-    }
-
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
-    }
-
-    public School getSchool() {
-        return school;
-    }
-
-    public void setSchool(School school) {
-        this.school = school;
-    }
-
-    public Boolean getDeleteFlag() {
-        return deleteFlag;
-    }
-
-    public void setDeleteFlag(Boolean deleteFlag) {
-        this.deleteFlag = deleteFlag;
-    }
+    /**
+     * 创建时间
+     */
+    private LocalDate createTime;
 }

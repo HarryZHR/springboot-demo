@@ -33,11 +33,12 @@ public interface TeacherService {
      *
      * @param teacherNum  teacher's work id
      * @param teacherName teacher's name key
+     * @param pageType    sort type
      * @param pageNo      current page number
      * @param pageSize    every page teacher's number
      * @return teacher collection
      */
-    Page<Teacher> listTeacherByPage(String teacherNum, String teacherName, Integer pageNo, Integer pageSize);
+    Page<Teacher> listTeacherByPage(String teacherNum, String teacherName, String pageType, Integer pageNo, Integer pageSize);
 
     /**
      * 保存教师
@@ -54,4 +55,12 @@ public interface TeacherService {
      * @return 教师对象
      */
     Teacher getTeacherById(Long id);
+
+    /**
+     * 更新教师信息
+     *
+     * @param teacher 教师的新信息
+     * @return 数据库影响行数
+     */
+    Integer updateTeacher(Teacher teacher);
 }

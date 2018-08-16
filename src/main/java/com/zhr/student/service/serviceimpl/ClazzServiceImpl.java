@@ -91,4 +91,11 @@ public class ClazzServiceImpl implements ClazzService {
     public Clazz getClazzByHeadTeacher(Long headTeacherId) {
         return clazzDAO.findClazzByHeadTeacher(headTeacherId);
     }
+
+    @Override
+    public Integer updateClazz(Clazz clazz) {
+        Clazz origin = clazzDAO.findClazzById(clazz.getClazzId());
+        origin.setHeadTeacher(clazz.getHeadTeacher());
+        return clazzDAO.updateClazz(origin);
+    }
 }

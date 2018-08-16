@@ -66,6 +66,7 @@ public class TeacherController {
      *
      * @param teacherNum  教师的工号
      * @param teacherName 教师的姓名
+     * @param pageType    获取的结果排序类型
      * @param pageNo      页码
      * @param pageSize    一页的记录数
      * @return 教师的分页结果
@@ -73,10 +74,11 @@ public class TeacherController {
     @GetMapping(params = "action=get_page")
     public Result getTeacherPage(@RequestParam(value = "teacherNum", required = false) String teacherNum,
                                  @RequestParam(value = "teacherName", required = false) String teacherName,
+                                 @RequestParam(value = "pageType", required = false) String pageType,
                                  @RequestParam(value = "pageNo", required = false, defaultValue = "1") Integer pageNo,
-                                 @RequestParam(value = "pageSize", required = false, defaultValue = "5") Integer pageSize) {
+                                 @RequestParam(value = "pageSize", required = false, defaultValue = "10") Integer pageSize) {
 
-        Page<Teacher> teacherPage = teacherService.listTeacherByPage(teacherNum, teacherName, pageNo, pageSize);
+        Page<Teacher> teacherPage = teacherService.listTeacherByPage(teacherNum, teacherName, pageType, pageNo, pageSize);
         List<TeacherSaveDTO> teacherDTOS = teacherPage.stream().map(teacher -> {
             TeacherSaveDTO dto = new TeacherSaveDTO().convertFrom(teacher);
             Clazz clazz = clazzService.getClazzByHeadTeacher(teacher.getTeacherId());
@@ -111,5 +113,27 @@ public class TeacherController {
     public Result getTeacher(@PathVariable Long teacherId) {
         Teacher teacher = teacherService.getTeacherById(teacherId);
         return new Result<>(new TeacherSaveDTO().convertFrom(teacher));
+    }
+
+    /**
+     * 修改教师信息
+     *
+     * @param teacherId 教师的id
+     * @param dto 教师的信息
+     * @return 修改了几条
+     */
+    @PutMapping(value = "/{teacherId}", params = "action=update_one")
+    public Result updateTeacher(@PathVariable Long teacherId,
+                                @RequestBody TeacherSaveDTO dto) {
+        Teacher teacher = dto.convertTo();
+        Teacher exist = teacherService.getTeacherById(teacherId);
+        Map<String, Integer> resMap = new HashMap<>(1);
+        if (exist != null) {
+            teacher.setTeacherId(teacherId);
+            resMap.put("colNum", teacherService.updateTeacher(teacher));
+        } else {
+            resMap.put("colNum", 0);
+        }
+        return new Result<>(resMap);
     }
 }

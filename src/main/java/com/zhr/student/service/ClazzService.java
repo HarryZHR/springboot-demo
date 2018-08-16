@@ -2,7 +2,6 @@ package com.zhr.student.service;
 
 import com.github.pagehelper.Page;
 import com.zhr.student.entity.Clazz;
-import org.checkerframework.checker.units.qual.C;
 
 import java.util.List;
 
@@ -58,8 +57,17 @@ public interface ClazzService {
 
     /**
      * 查找教师担任班主任的班级
+     *
      * @param headTeacherId 教师id
      * @return 班级
      */
     Clazz getClazzByHeadTeacher(Long headTeacherId);
+
+    /**
+     * 更新班级信息
+     *
+     * @param clazz 班级的信息
+     * @return 影响行数
+     */
+    Integer updateClazz(Clazz clazz);
 }

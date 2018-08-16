@@ -1,6 +1,6 @@
 package com.zhr.student.common.util;
 
-import java.time.LocalDateTime;
+import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.temporal.ChronoUnit;
 
@@ -16,23 +16,20 @@ public class DateUtils {
     public static final String FORMAT_V3 = "yyyy-MM";
     public static final String FORMAT_V4 = "yyyy";
 
-    public static String formatDate(LocalDateTime date, String format) {
+    public static String formatDate(LocalDate date, String format) {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern(format);
         return formatter.format(date);
     }
 
-    public static LocalDateTime parseDate(String dateStr, String format) {
-        if (format == null) {
-            format = FORMAT_V1;
-        }
+    public static LocalDate parseDate(String dateStr, String format) {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern(format);
-        return LocalDateTime.parse(dateStr, formatter);
+        return LocalDate.parse(dateStr, formatter);
     }
 
 
-    public static Integer getAge(LocalDateTime birthDay) {
-        LocalDateTime localDateTime = LocalDateTime.from(birthDay);
-        return (int) ChronoUnit.YEARS.between(localDateTime, LocalDateTime.now());
+    public static Integer getAge(LocalDate birthDay) {
+        LocalDate localDate = LocalDate.from(birthDay);
+        return (int) ChronoUnit.YEARS.between(localDate, LocalDate.now());
     }
 
 }
