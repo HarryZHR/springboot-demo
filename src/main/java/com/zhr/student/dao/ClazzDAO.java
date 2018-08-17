@@ -29,7 +29,8 @@ public interface ClazzDAO {
             "WHERE t1.delete_flag = true " +
             "<if test='grade != null'> AND t1.grade = #{grade} </if>" +
             "<if test='clazzNum != null'> AND t1.clazz_num = #{clazzNum} </if>" +
-            "<if test='headTeacherName != null'> AND t2.teacher_name like #{headTeacherName} </if></script>")
+            "<if test='headTeacherName != null'> AND t2.teacher_name like #{headTeacherName} </if>" +
+            "ORDER BY t1.grade ASC, t1.clazz_num ASC </script>")
     @Results({
             @Result(property = "headTeacher", column = "head_teacher_id", javaType = Teacher.class,
                     one = @One(select = "com.zhr.student.dao.TeacherDAO.getTeacherById"))

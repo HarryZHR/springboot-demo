@@ -1,8 +1,9 @@
 package com.zhr.student.entity;
 
 import lombok.Data;
+import lombok.Getter;
 
-import java.time.LocalDateTime;
+import java.time.LocalDate;
 
 /**
  * 学生对象
@@ -12,15 +13,25 @@ import java.time.LocalDateTime;
 @Data
 public class Student {
 
+    @Getter
+    public enum StudentGender{
+        /**
+         * 性别为男
+         */
+        male("男"),
+
+        female("女");
+
+        private String value;
+
+        StudentGender(String value) {
+            this.value = value;
+        }
+    }
     /**
      * 学生的id
      */
     private Long studentId;
-
-    /**
-     * 学生的学号
-     */
-    private String studentNum;
 
     /**
      * 学生的姓名
@@ -30,17 +41,12 @@ public class Student {
     /**
      * 学生的性别
      */
-    private String gender;
+    private StudentGender gender;
 
     /**
      * 学生的生日
      */
-    private LocalDateTime birthday;
-
-    /**
-     * 学生的班级
-     */
-    private Clazz clazz;
+    private LocalDate birthday;
 
     /**
      * 学生账号的登陆密码
@@ -52,5 +58,9 @@ public class Student {
      */
     private Boolean deleteFlag;
 
+    /**
+     * 所属的学校
+     */
+    private School school;
 
 }
