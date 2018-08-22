@@ -97,4 +97,9 @@ public class ClazzController {
         return new Result<>(resMap);
     }
 
+    @PostMapping(params = "save_clazz_student")
+    public Result saveClazzStudent() {
+
+        return null;
+    }
 }

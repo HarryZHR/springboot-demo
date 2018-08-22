@@ -34,6 +34,15 @@ public class Student {
     private Long studentId;
 
     /**
+     * 学生学校的唯一学号
+     */
+    private String studentNum;
+
+    /**
+     * 学生所在班级的学号
+     */
+    private String studentClazzNum;
+    /**
      * 学生的姓名
      */
     private String studentName;
