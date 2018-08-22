@@ -6,7 +6,7 @@ import com.zhr.student.dto.clazz.ClazzDTO;
 import com.zhr.student.dto.clazz.ClazzInfoDTO;
 import com.zhr.student.dto.clazz.ClazzUpdateDTO;
 import com.zhr.student.entity.Clazz;
-import com.zhr.student.service.ClazzService;
+import com.zhr.student.service.itf.ClazzService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 

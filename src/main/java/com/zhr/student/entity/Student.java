@@ -36,12 +36,8 @@ public class Student {
     /**
      * 学生学校的唯一学号
      */
-    private String studentNum;
+    private String studentNo;
 
-    /**
-     * 学生所在班级的学号
-     */
-    private String studentClazzNum;
     /**
      * 学生的姓名
      */
@@ -71,5 +67,10 @@ public class Student {
      * 所属的学校
      */
     private School school;
+
+    /**
+     * 入学年份
+     */
+    private Integer startYear;
 
 }

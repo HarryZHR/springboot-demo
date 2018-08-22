@@ -1,4 +1,4 @@
-package com.zhr.student.service;
+package com.zhr.student.service.itf;
 
 import com.github.pagehelper.Page;
 import com.zhr.student.entity.Student;

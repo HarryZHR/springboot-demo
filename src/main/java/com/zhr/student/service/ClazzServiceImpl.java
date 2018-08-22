@@ -1,4 +1,4 @@
-package com.zhr.student.service.serviceimpl;
+package com.zhr.student.service;
 
 import com.github.pagehelper.Page;
 import com.github.pagehelper.PageHelper;
@@ -7,7 +7,7 @@ import com.zhr.student.dao.ClazzDAO;
 import com.zhr.student.dao.SchoolDAO;
 import com.zhr.student.entity.Clazz;
 import com.zhr.student.entity.School;
-import com.zhr.student.service.ClazzService;
+import com.zhr.student.service.itf.ClazzService;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;

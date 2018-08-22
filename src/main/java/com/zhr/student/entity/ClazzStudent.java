@@ -15,16 +15,17 @@ public class ClazzStudent {
     private Long id;
 
     /**
-     * 班级
-     */
-    private Clazz clazz;
-    /**
      * 学生
      */
     private Student student;
-    /**
-     * 学期 1、2、3、4、5、6
-     */
-    private Integer semester;
 
+    /**
+     * 学生在班级里的学号
+     */
+    private Integer studentClazzNo;
+
+    /**
+     * 学生所在班级号
+     */
+    private Integer clazzNum;
 }

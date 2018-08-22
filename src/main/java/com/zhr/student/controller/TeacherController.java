@@ -6,8 +6,8 @@ import com.zhr.student.common.util.ClazzGradeUtils;
 import com.zhr.student.dto.teacher.TeacherSaveDTO;
 import com.zhr.student.entity.Clazz;
 import com.zhr.student.entity.Teacher;
-import com.zhr.student.service.ClazzService;
-import com.zhr.student.service.TeacherService;
+import com.zhr.student.service.itf.ClazzService;
+import com.zhr.student.service.itf.TeacherService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
