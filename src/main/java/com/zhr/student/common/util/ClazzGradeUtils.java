@@ -2,6 +2,9 @@ package com.zhr.student.common.util;
 
 import com.zhr.student.entity.Clazz;
 
+import java.time.LocalDate;
+import java.time.Period;
+
 /**
  * 获取年级中文的工具类
  *
@@ -45,5 +48,15 @@ public class ClazzGradeUtils {
     public static String getGradeName(Clazz clazz) {
         return clazz.getType().getValue().substring(0, 1) +
                 getGrade(clazz.getGrade()).substring(0, 1);
+    }
+
+    public static Integer getGradeByYear(Integer year) {
+        LocalDate starDate = LocalDate.of(year, 8, 31);
+        int period = Period.between(LocalDate.now(),starDate).getMonths();
+        return period;
+    }
+
+    public static void main(String[] args) {
+        System.out.println(getGradeByYear(2018));
     }
 }

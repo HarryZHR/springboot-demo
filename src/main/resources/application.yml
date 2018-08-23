@@ -3,25 +3,10 @@ server:
 spring:
   datasource:
     username: root
-    password: root
+    password: 1234
     url: jdbc:mysql://localhost:3306/student?useUnicode=true&zeroDateTimeBehavior=convertToNull&characterEncoding=UTF-8&autoReconnect=true
     driver-class-name: com.mysql.jdbc.Driver
     type: com.alibaba.druid.pool.DruidDataSource
-    druid:
-      initialSize: 5
-      minIdle: 5
-      maxActive: 20
-      maxWait: 60000
-      timeBetweenEvictionRunsMillis: 60000
-      minEvictableIdleTimeMillis: 300000
-      validationQuery: SELECT 1 FROM DUAL
-      testWhileIdle: true
-      testOnBorrow: false
-      testOnReturn: false
-      poolPreparedStatements: true
-      maxPoolPreparedStatementPerConnectionSize: 20
-      filters: stat,wall,log4jtrue
-
 mybatis:
   type-aliases-package: com.zhr.student.entity.*
   check-config-location: true

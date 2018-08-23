@@ -59,4 +59,12 @@ public class StudentController {
         student.setStudentId(studentId);
         return new Result<>(studentService.updateStudent(student));
     }
+
+
+    @GetMapping(value = "/{studentId}",params = "action=get_clazz")
+    public Result getStudentClazz(@PathVariable Long studentId) {
+        Student student = studentService.getStudentOne(studentId);
+        student.getStartYear();
+        return null;
+    }
 }
