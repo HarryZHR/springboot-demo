@@ -98,9 +98,7 @@ public class TeacherController {
      */
     @PostMapping(params = "action=save_one")
     public Result saveTeacher(@RequestBody TeacherSaveDTO teacherSaveDTO) {
-        Map<String, Integer> resultMap = new HashMap<>(1);
-        resultMap.put("colNum", teacherService.saveTeacher(teacherSaveDTO.convertTo()));
-        return new Result<>(resultMap);
+        return new Result<>(teacherService.saveTeacher(teacherSaveDTO.convertTo()));
     }
 
     /**
@@ -126,14 +124,7 @@ public class TeacherController {
     public Result updateTeacher(@PathVariable Long teacherId,
                                 @RequestBody TeacherSaveDTO dto) {
         Teacher teacher = dto.convertTo();
-        Teacher exist = teacherService.getTeacherById(teacherId);
-        Map<String, Integer> resMap = new HashMap<>(1);
-        if (exist != null) {
-            teacher.setTeacherId(teacherId);
-            resMap.put("colNum", teacherService.updateTeacher(teacher));
-        } else {
-            resMap.put("colNum", 0);
-        }
-        return new Result<>(resMap);
+        teacher.setTeacherId(teacherId);
+        return new Result<>(teacherService.updateTeacher(teacher));
     }
 }

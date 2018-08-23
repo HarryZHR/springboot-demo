@@ -63,9 +63,7 @@ public class ClazzController {
      */
     @PostMapping(params = "action=save_list")
     public Result saveClazzList(@RequestBody ClazzDTO clazzDTO) {
-        Map<String, Integer> resultMap = new HashMap<>(1);
-        resultMap.put("colNum", clazzService.saveClazzList(clazzDTO.convertTo(), clazzDTO.getEndClazzNum()));
-        return new Result<>(resultMap);
+        return new Result<>(clazzService.saveClazzList(clazzDTO.convertTo(), clazzDTO.getEndClazzNum()));
     }
 
     /**
@@ -90,16 +88,13 @@ public class ClazzController {
     @PutMapping(value = "/{clazzId}")
     public Result updateClazz(@PathVariable Long clazzId,
                               @RequestBody ClazzUpdateDTO clazzDTO) {
-        Map<String, Integer> resMap = new HashMap<>(1);
         Clazz clazz = clazzDTO.convertTo();
         clazz.setClazzId(clazzId);
-        resMap.put("colNum", clazzService.updateClazz(clazz));
-        return new Result<>(resMap);
+        return new Result<>(clazzService.updateClazz(clazz));
     }
 
     @PostMapping(params = "save_clazz_student")
     public Result saveClazzStudent() {
-
         return null;
     }
 }

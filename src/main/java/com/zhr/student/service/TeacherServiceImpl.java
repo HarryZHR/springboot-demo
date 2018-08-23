@@ -54,11 +54,15 @@ public class TeacherServiceImpl implements TeacherService {
 
     @Override
     public Integer saveTeacher(Teacher teacher) {
-        teacher.setIdentity(Teacher.TeacherIdentity.valueOf("teacher"));
-        teacher.setPassword("123456");
-        teacher.setSchool(schoolDAO.getSchoolById(324234234L));
-        teacher.setDeleteFlag(true);
-        return teacherDAO.saveTeacher(teacher);
+        List<Teacher> teachers = teacherDAO.findAllByNum(teacher.getTeacherNum(), 324234234L);
+        if ( teachers == null || teachers.size() == 0) {
+            teacher.setIdentity(Teacher.TeacherIdentity.valueOf("teacher"));
+            teacher.setPassword("123456");
+            teacher.setSchool(schoolDAO.getSchoolById(324234234L));
+            teacher.setDeleteFlag(true);
+            return teacherDAO.saveTeacher(teacher);
+        }
+        return -1;
     }
 
     @Override
@@ -69,6 +73,9 @@ public class TeacherServiceImpl implements TeacherService {
     @Override
     public Integer updateTeacher(Teacher teacher) {
         Teacher origin = teacherDAO.getTeacherById(teacher.getTeacherId());
+        if (origin == null) {
+            return -1;
+        }
         if (teacher.getBirthday() != null) {
             origin.setBirthday(teacher.getBirthday());
         }

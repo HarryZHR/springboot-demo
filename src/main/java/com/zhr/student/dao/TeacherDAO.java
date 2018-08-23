@@ -78,4 +78,14 @@ public interface TeacherDAO {
      */
     @Update("UPDATE `teacher` SET teacher_name = #{teacherName}, birthday = #{birthday}, gender = #{gender}, password = #{password}, delete_flag = #{deleteFlag} WHERE teacher_id = #{teacherId}")
     Integer updateTeacher(Teacher teacher);
+
+    /**
+     * 通过教师工号和学校查询教师
+     * @param teacherNum 工号
+     * @param schoolId 学校id
+     * @return 教师
+     */
+    @Select("SELECT * FROM WHERE teacher_num = #{teacherNum} AND schoolId = #{schoolId} AND delete_flag")
+    List<Teacher> findAllByNum(@Param(value = "teacherNum") String teacherNum,
+                               @Param(value = "schoolId") Long schoolId);
 }

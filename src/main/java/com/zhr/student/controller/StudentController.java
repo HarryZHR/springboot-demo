@@ -5,6 +5,7 @@ import com.zhr.student.common.result.Result;
 import com.zhr.student.dto.student.StudentDTO;
 import com.zhr.student.entity.Student;
 import com.zhr.student.service.itf.StudentService;
+import jdk.nashorn.internal.objects.annotations.Getter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -42,9 +43,20 @@ public class StudentController {
 
     @PostMapping(params = "action=save_one")
     public Result saveStudent(@RequestBody StudentDTO studentDTO) {
-        System.out.println(111);
-        Map<String, Integer> res = new HashMap<>(1);
-        res.put("colNum", studentService.saveStudent(studentDTO.convertTo()));
-        return new Result<>(res);
+        return new Result<>(studentService.saveStudent(studentDTO.convertTo()));
+    }
+
+    @GetMapping(value = "/{studentId}", params = "action=get_one")
+    public Result getStudentOne(@PathVariable Long studentId) {
+        Student student = studentService.getStudentOne(studentId);
+        return new Result<>(new StudentDTO().convertFrom(student));
+    }
+
+    @PutMapping(value = "/{studentId}", params = "action=update_one")
+    public Result updateStudent(@PathVariable Long studentId,
+                                @RequestBody StudentDTO studentDTO) {
+        Student student = studentDTO.convertTo();
+        student.setStudentId(studentId);
+        return new Result<>(studentService.updateStudent(student));
     }
 }

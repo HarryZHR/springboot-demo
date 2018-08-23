@@ -12,13 +12,15 @@ import lombok.Data;
  */
 @Data
 public class StudentDTO {
-
+    private Long studentId;
     private String studentName;
     private String studentGender;
     private String studentGenderValue;
     private Integer studentAge;
     private String studentBirthday;
     private String clazzName;
+    private Integer startYear;
+    private String studentNo;
 
     public Student convertTo() {
         StudentDtoConvert dtoConvert = new StudentDtoConvert();
@@ -38,7 +40,8 @@ public class StudentDTO {
             student.setStudentName(studentDTO.getStudentName());
             student.setGender(Student.StudentGender.valueOf(studentDTO.getStudentGender()));
             student.setBirthday(DateUtils.parseDate(studentDTO.getStudentBirthday(), DateUtils.FORMAT_V2));
-            String clazzName = studentDTO.getClazzName();
+            student.setStartYear(studentDTO.getStartYear());
+            student.setStudentNo(studentDTO.getStudentNo());
             return student;
         }
 
@@ -51,6 +54,10 @@ public class StudentDTO {
             if (student.getBirthday() != null) {
                 dto.setStudentAge(DateUtils.getAge(student.getBirthday()));
             }
+            dto.setStudentNo(student.getStudentNo());
+            dto.setStudentId(student.getStudentId());
+            dto.setStudentBirthday(DateUtils.formatDate(student.getBirthday(), DateUtils.FORMAT_V2));
+            dto.setStartYear(student.getStartYear());
             return dto;
         }
     }

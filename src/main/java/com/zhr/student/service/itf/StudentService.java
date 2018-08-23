@@ -28,4 +28,20 @@ public interface StudentService {
      * @return 保存了几条记录
      */
     Integer saveStudent(Student student);
+
+    /**
+     * 通过id获取学生对象
+     *
+     * @param studentId 学生id
+     * @return 学生对象
+     */
+    Student getStudentOne(Long studentId);
+
+    /**
+     * 更新一条学生信息
+     *
+     * @param student 学生参数
+     * @return 影响行数
+     */
+    Integer updateStudent(Student student);
 }
