@@ -1,9 +1,11 @@
 package com.zhr.student.common.util;
 
 import com.zhr.student.entity.Clazz;
+import org.apache.ibatis.annotations.Param;
 
 import java.time.LocalDate;
 import java.time.Period;
+import java.time.temporal.ChronoUnit;
 
 /**
  * 获取年级中文的工具类
@@ -36,7 +38,7 @@ public class ClazzGradeUtils {
             default:
                 return "未知";
         }
-        return gradeNum + "年级";
+        return gradeNum;
     }
 
     public static String getClazzName(Clazz clazz) {
@@ -51,12 +53,16 @@ public class ClazzGradeUtils {
     }
 
     public static Integer getGradeByYear(Integer year) {
-        LocalDate starDate = LocalDate.of(year, 8, 31);
-        int period = Period.between(LocalDate.now(),starDate).getMonths();
-        return period;
+        LocalDate starDate = LocalDate.of(year, 6, 30);
+        Period period = Period.between(starDate, LocalDate.now());
+        if (period.getYears() == 0 && period.getMonths() >= 0 && period.getMonths() <= 12) {
+            return 1;
+        } else if (period.getYears() == 1 && period.getMonths() >= 0 && period.getMonths() <= 12) {
+            return 2;
+        } else if (period.getYears() == 2 && period.getMonths() >= 0 && period.getMonths() <= 12) {
+            return 3;
+        }
+        return null;
     }
 
-    public static void main(String[] args) {
-        System.out.println(getGradeByYear(2018));
-    }
 }

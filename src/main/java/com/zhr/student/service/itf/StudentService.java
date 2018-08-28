@@ -3,6 +3,8 @@ package com.zhr.student.service.itf;
 import com.github.pagehelper.Page;
 import com.zhr.student.entity.Student;
 
+import java.util.List;
+
 /**
  * 学生的服务层接口
  *
@@ -44,4 +46,13 @@ public interface StudentService {
      * @return 影响行数
      */
     Integer updateStudent(Student student);
+
+    /**
+     * 获取一个学生所在年级的所有班级
+     *
+     * @param student 学生
+     * @return 班级号
+     */
+    List<Integer> listClazzNumByStudent(Student student);
+
 }

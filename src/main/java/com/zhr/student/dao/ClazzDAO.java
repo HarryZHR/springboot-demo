@@ -111,9 +111,19 @@ public interface ClazzDAO {
 
     /**
      * 修改班级信息
+     *
      * @param clazz 班级的信息
      * @return 影响行数
      */
     @Update("UPDATE `clazz` SET head_teacher_id = #{headTeacher.teacherId}, delete_flag = #{deleteFlag} WHERE clazz_id = #{clazzId}")
     Integer updateClazz(Clazz clazz);
+
+    /**
+     * 查询一个年级的所有班级
+     *
+     * @param grade 年级
+     * @return 所有班级
+     */
+    @Select("SELECT `clazz_num` FROM `clazz` WHERE `grade` = #{grade}")
+    List<Integer> findAllByGrade(Integer grade);
 }

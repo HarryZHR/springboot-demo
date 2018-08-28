@@ -1,6 +1,7 @@
 package com.zhr.student.dto.student;
 
 import com.google.common.base.Converter;
+import com.zhr.student.common.util.ClazzGradeUtils;
 import com.zhr.student.common.util.DateUtils;
 import com.zhr.student.entity.Student;
 import lombok.Data;
@@ -58,6 +59,10 @@ public class StudentDTO {
             dto.setStudentId(student.getStudentId());
             dto.setStudentBirthday(DateUtils.formatDate(student.getBirthday(), DateUtils.FORMAT_V2));
             dto.setStartYear(student.getStartYear());
+            Integer year = ClazzGradeUtils.getGradeByYear(student.getStartYear());
+            if (year != null) {
+                dto.setClazzName("高" + ClazzGradeUtils.getGrade(year));
+            }
             return dto;
         }
     }

@@ -2,6 +2,8 @@ package com.zhr.student.service;
 
 import com.github.pagehelper.Page;
 import com.github.pagehelper.PageHelper;
+import com.zhr.student.common.util.ClazzGradeUtils;
+import com.zhr.student.dao.ClazzDAO;
 import com.zhr.student.dao.StudentDAO;
 import com.zhr.student.entity.School;
 import com.zhr.student.entity.Student;
@@ -22,6 +24,9 @@ public class StudentServiceImpl implements StudentService {
 
     @Resource
     private StudentDAO studentDAO;
+
+    @Resource
+    private ClazzDAO clazzDAO;
 
     @Override
     public Page<Student> listStudentByPage(String studentNum, String studentName, Long clazzId, Integer pageNo, Integer pageSize) {
@@ -64,6 +69,12 @@ public class StudentServiceImpl implements StudentService {
         origin.setGender(student.getGender());
         origin.setBirthday(student.getBirthday());
         return studentDAO.updateStudent(origin);
+    }
+
+    @Override
+    public List<Integer> listClazzNumByStudent(Student student) {
+        Integer year = ClazzGradeUtils.getGradeByYear(student.getStartYear());
+        return clazzDAO.findAllByGrade(year);
     }
 
 }

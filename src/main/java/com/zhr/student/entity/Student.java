@@ -73,4 +73,8 @@ public class Student {
      */
     private Integer startYear;
 
+    /**
+     * 学生对应的班级
+     */
+    private ClazzStudent clazzStudent;
 }

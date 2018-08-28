@@ -1,7 +1,9 @@
 package com.zhr.student.dao;
 
 import com.github.pagehelper.Page;
+import com.zhr.student.entity.ClazzStudent;
 import com.zhr.student.entity.Student;
+import com.zhr.student.entity.Teacher;
 import org.apache.ibatis.annotations.*;
 import org.springframework.web.bind.annotation.RequestMapping;
 
@@ -27,6 +29,10 @@ public interface StudentDAO {
             "<if test='studentNo != null'> AND student_no = #{studentNo} </if>" +
             "<if test='studentName != null'> AND student_name LIKE #{studentName} </if>" +
             " ORDER BY student_no ASC </script>")
+    @Results({
+            @Result(property = "clazzStudent", column = "head_teacher_id", javaType = ClazzStudent.class,
+                    one = @One(select = "com.zhr.student.dao.TeacherDAO.getTeacherById"))
+    })
     Page<Student> findAllStudent(@Param(value = "studentNo") String studentNo,
                                  @Param(value = "studentName") String studentName,
                                  @Param(value = "schoolId") Long schoolId);
@@ -67,4 +73,13 @@ public interface StudentDAO {
      */
     @Update("UPDATE `student` SET student_name = #{studentName}, gender = #{gender}, start_year = #{startYear}, birthday = #{birthday} WHERE student_id = #{studentId}")
     Integer updateStudent(Student student);
+
+    /**
+     * 保存一条学生和班级的数据
+     * @param student 学生
+     * @param clazzNum 班级
+     * @return 影响行数
+     */
+    @Insert("INSERT INTO `clazz_student` (id, student_id, student_clazz_no, clazz_num) VALUES (#{id}, #{studentId}, #{studentClazzNo}, #{clazzNum})")
+    Integer saveStudentClazz(Student student, Integer clazzNum);
 }

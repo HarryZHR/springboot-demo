@@ -2,6 +2,7 @@ package com.zhr.student.controller;
 
 import com.github.pagehelper.Page;
 import com.zhr.student.common.result.Result;
+import com.zhr.student.common.util.ClazzGradeUtils;
 import com.zhr.student.dto.student.StudentDTO;
 import com.zhr.student.entity.Student;
 import com.zhr.student.service.itf.StudentService;
@@ -60,11 +61,10 @@ public class StudentController {
         return new Result<>(studentService.updateStudent(student));
     }
 
-
     @GetMapping(value = "/{studentId}",params = "action=get_clazz")
     public Result getStudentClazz(@PathVariable Long studentId) {
         Student student = studentService.getStudentOne(studentId);
-        student.getStartYear();
-        return null;
+        List<Integer> clazzNumList = studentService.listClazzNumByStudent(student);
+        return new Result<>(clazzNumList);
     }
 }
