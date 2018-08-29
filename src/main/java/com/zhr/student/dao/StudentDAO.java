@@ -74,12 +74,4 @@ public interface StudentDAO {
 //    @Update("UPDATE `student` SET student_name = #{studentName}, gender = #{gender}, start_year = #{startYear}, birthday = #{birthday} WHERE student_id = #{studentId}")
 //    Integer updateStudent(Student student);
 
-    /**
-     * 保存一条学生和班级的数据
-     * @param student 学生
-     * @param clazzNum 班级
-     * @return 影响行数
-     */
-    @Insert("INSERT INTO `clazz_student` (id, student_id, student_clazz_no, clazz_num) VALUES (#{id}, #{studentId}, #{studentClazzNo}, #{clazzNum})")
-    Integer saveStudentClazz(Student student, Integer clazzNum);
 }

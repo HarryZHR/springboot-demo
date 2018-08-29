@@ -4,9 +4,13 @@ import com.github.pagehelper.Page;
 import com.github.pagehelper.PageHelper;
 import com.zhr.student.common.util.ClazzGradeUtils;
 import com.zhr.student.dao.ClazzDAO;
+import com.zhr.student.dao.ClazzStudentDAO;
 import com.zhr.student.dao.SchoolDAO;
+import com.zhr.student.dao.StudentDAO;
 import com.zhr.student.entity.Clazz;
+import com.zhr.student.entity.ClazzStudent;
 import com.zhr.student.entity.School;
+import com.zhr.student.entity.Student;
 import com.zhr.student.service.itf.ClazzService;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Service;
@@ -30,6 +34,12 @@ public class ClazzServiceImpl implements ClazzService {
 
     @Resource
     private SchoolDAO schoolDAO;
+
+    @Resource
+    private ClazzStudentDAO clazzStudentDAO;
+
+    @Resource
+    private StudentDAO studentDAO;
 
     @Transactional(readOnly = true, rollbackFor = Exception.class)
     @Override
@@ -97,5 +107,15 @@ public class ClazzServiceImpl implements ClazzService {
         Clazz origin = clazzDAO.findClazzById(clazz.getClazzId());
         origin.setHeadTeacher(clazz.getHeadTeacher());
         return clazzDAO.updateClazz(origin);
+    }
+
+    @Override
+    public Integer saveClazzStudent(Long studentId, Long clazzId) {
+        ClazzStudent clazzStudent = new ClazzStudent();
+        Student student = studentDAO.findOneByStudentId(studentId);
+        Clazz clazz = clazzDAO.findClazzById(clazzId);
+        clazzStudent.setStudent(student);
+        clazzStudent.setClazzNum(clazz.getClazzNum());
+        return clazzStudentDAO.saveStudentClazz(clazzStudent);
     }
 }

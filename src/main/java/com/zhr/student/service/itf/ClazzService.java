@@ -2,6 +2,8 @@ package com.zhr.student.service.itf;
 
 import com.github.pagehelper.Page;
 import com.zhr.student.entity.Clazz;
+import com.zhr.student.entity.ClazzStudent;
+import com.zhr.student.entity.Student;
 
 import java.util.List;
 
@@ -70,4 +72,13 @@ public interface ClazzService {
      * @return 影响行数
      */
     Integer updateClazz(Clazz clazz);
+
+    /**
+     * 保存一条班级学生记录
+     *
+     * @param studentId  学生id
+     * @param clazzId 班级id
+     * @return 影响行数
+     */
+    Integer saveClazzStudent(Long studentId, Long clazzId);
 }

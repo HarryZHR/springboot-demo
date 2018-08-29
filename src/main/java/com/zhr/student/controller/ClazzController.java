@@ -93,8 +93,9 @@ public class ClazzController {
         return new Result<>(clazzService.updateClazz(clazz));
     }
 
-    @PostMapping(params = "save_clazz_student")
-    public Result saveClazzStudent() {
-        return null;
+    @PostMapping(params = "action=save_clazz_student")
+    public Result saveClazzStudent(@RequestParam(value = "studentId") Long studentId,
+                                   @RequestParam(value = "clazzId") Long clazzId) {
+        return new Result<>(clazzService.saveClazzStudent(studentId, clazzId));
     }
 }
