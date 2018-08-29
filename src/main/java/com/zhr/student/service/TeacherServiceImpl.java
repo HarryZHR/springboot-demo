@@ -60,7 +60,7 @@ public class TeacherServiceImpl implements TeacherService {
             teacher.setPassword("123456");
             teacher.setSchool(schoolDAO.getSchoolById(324234234L));
             teacher.setDeleteFlag(true);
-            return teacherDAO.saveTeacher(teacher);
+            return teacherDAO.saveOrUpdateTeacher(teacher);
         }
         return -1;
     }
@@ -81,6 +81,6 @@ public class TeacherServiceImpl implements TeacherService {
         }
         origin.setGender(teacher.getGender());
         origin.setTeacherName(teacher.getTeacherName());
-        return teacherDAO.updateTeacher(origin);
+        return teacherDAO.saveOrUpdateTeacher(origin);
     }
 }

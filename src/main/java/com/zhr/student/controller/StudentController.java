@@ -2,17 +2,13 @@ package com.zhr.student.controller;
 
 import com.github.pagehelper.Page;
 import com.zhr.student.common.result.Result;
-import com.zhr.student.common.util.ClazzGradeUtils;
 import com.zhr.student.dto.student.StudentDTO;
 import com.zhr.student.entity.Student;
 import com.zhr.student.service.itf.StudentService;
-import jdk.nashorn.internal.objects.annotations.Getter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 import java.util.stream.Collectors;
 
 /**

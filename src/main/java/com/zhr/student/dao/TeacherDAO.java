@@ -67,17 +67,19 @@ public interface TeacherDAO {
      * @param teacher 教师的参数
      * @return 影响行数
      */
-    @Insert("INSERT INTO `teacher` VALUES (#{teacherId}, #{teacherNum}, #{teacherName}, #{birthday}, #{gender}, #{identity}, #{password}, #{school.schoolId}, #{deleteFlag})")
-    Integer saveTeacher(Teacher teacher);
+    @Insert("INSERT INTO `teacher` VALUES (#{teacherId}, #{teacherNum}, #{teacherName}, #{birthday}, #{gender}, #{identity}, #{password}, #{school.schoolId}, #{deleteFlag}) " +
+            "ON DUPLICATE KEY UPDATE " +
+            "teacher_name = VALUES(teacherName), birthday = VALUES(birthday), gender = VALUES(gender), password = VALUES(password), delete_flag = VALUES(deleteFlag)")
+    Integer saveOrUpdateTeacher(Teacher teacher);
 
-    /**
+    /*
      * 更新一条教师的记录
      *
      * @param teacher 教师的新信息
      * @return 影响行数
      */
-    @Update("UPDATE `teacher` SET teacher_name = #{teacherName}, birthday = #{birthday}, gender = #{gender}, password = #{password}, delete_flag = #{deleteFlag} WHERE teacher_id = #{teacherId}")
-    Integer updateTeacher(Teacher teacher);
+//    @Update("UPDATE `teacher` SET WHERE teacher_id = #{teacherId}")
+//    Integer updateTeacher(Teacher teacher);
 
     /**
      * 通过教师工号和学校查询教师

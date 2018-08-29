@@ -48,7 +48,7 @@ public class StudentServiceImpl implements StudentService {
         List<Student> students = studentDAO.findAllByNo(student.getStudentNo(), 324234234L);
         if (students == null || students.size() == 0) {
             student.setPassword("123456");
-            return studentDAO.saveStudent(student);
+            return studentDAO.saveOrUpdateStudent(student);
         }
         return -1;
     }
@@ -68,7 +68,7 @@ public class StudentServiceImpl implements StudentService {
         origin.setStudentName(student.getStudentName());
         origin.setGender(student.getGender());
         origin.setBirthday(student.getBirthday());
-        return studentDAO.updateStudent(origin);
+        return studentDAO.saveOrUpdateStudent(origin);
     }
 
     @Override
