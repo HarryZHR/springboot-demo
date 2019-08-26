@@ -3,6 +3,9 @@ package com.zhr.student.controller;
 import com.github.pagehelper.Page;
 import com.zhr.student.common.result.Result;
 import com.zhr.student.dto.student.StudentDTO;
+import com.zhr.student.entity.Animals;
+import com.zhr.student.entity.Cat;
+import com.zhr.student.entity.Dog;
 import com.zhr.student.entity.Student;
 import com.zhr.student.service.itf.StudentService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -33,9 +36,16 @@ public class StudentController {
                               @RequestParam(value = "clazzId", required = false) Long clazzId,
                               @RequestParam(value = "pageNo", required = false, defaultValue = "1") Integer pageNo,
                               @RequestParam(value = "pageSize", required = false, defaultValue = "10") Integer pageSize) {
-        Page<Student> studentPage = studentService.listStudentByPage(studentName, studentNum, clazzId, pageNo, pageSize);
-        List<StudentDTO> studentDTOS = studentPage.stream().map(student -> new StudentDTO().convertFrom(student)).collect(Collectors.toList());
-        return new Result<>(studentDTOS, studentPage.getPages());
+//        Page<Student> studentPage = studentService.listStudentByPage(studentName, studentNum, clazzId, pageNo, pageSize);
+//        List<StudentDTO> studentDTOS = studentPage.stream().map(student -> new StudentDTO().convertFrom(student)).collect(Collectors.toList());
+//        return new Result<>(studentDTOS, studentPage.getPages());
+        if ("a".equals(studentName)) {
+            Animals dog = new Dog();
+
+        } else {
+            Animals cat = new Cat();
+        }
+        return null;
     }
 
     @PostMapping(params = "action=save_one")

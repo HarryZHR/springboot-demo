@@ -29,14 +29,14 @@ public class StudentServiceImpl implements StudentService {
     private ClazzDAO clazzDAO;
 
     @Override
-    public Page<Student> listStudentByPage(String studentNum, String studentName, Long clazzId, Integer pageNo, Integer pageSize) {
+    public Page<Student> listStudentByPage(String studentNum, String studentName, Integer clazzNum, Integer startYear, Integer pageNo, Integer pageSize) {
         if (StringUtils.isBlank(studentName)) {
             studentName = null;
         } else {
             studentName = "%" + studentName + "%";
         }
         PageHelper.startPage(pageNo, pageSize);
-        return studentDAO.findAllStudent(studentNum, studentName, 324234234L);
+        return studentDAO.findAllStudent(studentNum, studentName, 324234234L, startYear);
     }
 
     @Override
@@ -45,7 +45,7 @@ public class StudentServiceImpl implements StudentService {
         School school = new School();
         school.setSchoolId(324234234L);
         student.setSchool(school);
-        List<Student> students = studentDAO.findAllByNo(student.getStudentNo(), 324234234L);
+        List<Student> students = studentDAO.findAllStudent(student.getStudentNo(),null, 324234234L, null);
         if (students == null || students.size() == 0) {
             student.setPassword("123456");
             return studentDAO.saveOrUpdateStudent(student);

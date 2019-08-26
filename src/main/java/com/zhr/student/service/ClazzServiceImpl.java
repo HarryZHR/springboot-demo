@@ -17,6 +17,8 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.annotation.Resource;
+import java.time.LocalDate;
+import java.time.Month;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -111,11 +113,15 @@ public class ClazzServiceImpl implements ClazzService {
 
     @Override
     public Integer saveClazzStudent(Long studentId, Long clazzId) {
+        Clazz clazz = clazzDAO.findClazzById(clazzId);
+        List<ClazzStudent> clazzStudents = clazzStudentDAO.findAllClazzStudent(studentId, clazz.getClazzNum());
+        clazzStudents.forEach(origin -> clazzStudentDAO.deleteClazzStudent(origin.getId()));
         ClazzStudent clazzStudent = new ClazzStudent();
         Student student = studentDAO.findOneByStudentId(studentId);
-        Clazz clazz = clazzDAO.findClazzById(clazzId);
         clazzStudent.setStudent(student);
         clazzStudent.setClazzNum(clazz.getClazzNum());
+        clazzStudent.setUseFlag(true);
+        clazzStudent.setTermDate(LocalDate.now());
         return clazzStudentDAO.saveStudentClazz(clazzStudent);
     }
 }

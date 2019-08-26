@@ -16,12 +16,13 @@ public interface StudentService {
      *
      * @param studentNum  学生学号
      * @param studentName 学生姓名
-     * @param clazzId     班级id
+     * @param clazzNum     班级号
+     * @param startYear   所属年级
      * @param pageNo      当前页
      * @param pageSize    一页记录数
      * @return 学生的集合
      */
-    Page<Student> listStudentByPage(String studentNum, String studentName, Long clazzId, Integer pageNo, Integer pageSize);
+    Page<Student> listStudentByPage(String studentNum, String studentName, Integer clazzNum, Integer startYear, Integer pageNo, Integer pageSize);
 
     /**
      * 保存学生
